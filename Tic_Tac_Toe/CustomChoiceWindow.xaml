@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Tic_Tac_Toe"
         mc:Ignorable="d"
         Title="CustomChoiceWindow" Height="100" Width="550"
-        Loaded="CustomChoiceWindow_OnLoaded">
+        Loaded="CustomChoiceWindow_OnLoaded"
+        WindowStartupLocation="CenterScreen">
     <Grid Name="customGrid">
         <Label Name="customLabel" Content="Enter the size of the board you will like to play on(n x n):" FontWeight="DemiBold" FontSize="17" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top"/>
         <TextBox Name="customText" HorizontalAlignment="Left" Height="23" Margin="444,15,0,0" FontSize="17" TextWrapping="Wrap" BorderThickness="1" Text="0" VerticalAlignment="Top" Width="25" HorizontalContentAlignment="Center"/>

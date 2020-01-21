@@ -39,46 +39,12 @@ namespace Tic_Tac_Toe
         private void btn_GoClick(object sender, RoutedEventArgs e)
         {
             Application.Current.Properties["BoardSize"] = int.Parse(customText.Text);
-            
+
             CustomWindow customWindow = new CustomWindow();
-
-            Grid dynamicGrid = new Grid();
-
-            dynamicGrid.Height = 500;
-            dynamicGrid.Width = 500;
-
-            //Goes through and adds the correct number of rows and columns to grid
-            for (int i = 0; i < (int)Application.Current.Properties["BoardSize"]; i++)
-            {
-                ColumnDefinition gridCol = new ColumnDefinition();
-                RowDefinition gridRow = new RowDefinition();
-
-                dynamicGrid.ColumnDefinitions.Add(gridCol);
-                dynamicGrid.RowDefinitions.Add(gridRow);
-            }
-
-            //Creates a button and sets the button to a section in the grid
-            //Then adds the button to the grid children
-            for (int i = 0; i < (int)Application.Current.Properties["BoardSize"]; i++)
-            {
-                for (int j = 0; j < (int)Application.Current.Properties["BoardSize"]; j++)
-                {
-                    Button gridBtn = new Button();
-
-                    Grid.SetRow(gridBtn, i);
-                    Grid.SetColumn(gridBtn, j);
-                    
-
-                    dynamicGrid.Children.Add(gridBtn);
-                }
-            }
-
-            //Adds grid to the next window about to be opened
-            customWindow.Content = dynamicGrid;
 
             //Closes first window opens another
             this.Close();
-            customWindow.Show();
+            customWindow.createWindow(customWindow);
         }
     }
 }

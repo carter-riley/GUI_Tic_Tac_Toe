@@ -24,6 +24,100 @@ namespace Tic_Tac_Toe
             InitializeComponent();
         }
 
+        private List<Button> board = new List<Button>();
+        private bool playerTurn = false;
+
+
+        public void createWindow(CustomWindow w)
+        {
+            CustomWindow customWindow = w;
+            StackPanel stackPanel = new StackPanel();
+            Grid dynamicGrid = new Grid();
+
+            dynamicGrid.Height = 500;
+            dynamicGrid.Width = 500;
+            dynamicGrid.VerticalAlignment = VerticalAlignment.Bottom;
+
+            //Goes through and adds the correct number of rows and columns to grid
+            for (int i = 0; i < (int)Application.Current.Properties["BoardSize"]; i++)
+            {
+                ColumnDefinition gridCol = new ColumnDefinition();
+                RowDefinition gridRow = new RowDefinition();
+
+                dynamicGrid.ColumnDefinitions.Add(gridCol);
+                dynamicGrid.RowDefinitions.Add(gridRow);
+            }
+
+            //Creates a button and sets the button to a section in the grid
+            //Then adds the button to the grid children
+            for (int i = 0; i < (int)Application.Current.Properties["BoardSize"]; i++)
+            {
+                for (int j = 0; j < (int)Application.Current.Properties["BoardSize"]; j++)
+                {
+                    Button gridBtn = new Button();
+
+                    Grid.SetRow(gridBtn, i);
+                    Grid.SetColumn(gridBtn, j);
+                    gridBtn.Click += Button_Click;
+                    gridBtn.FontSize = 40;
+
+                    board.Add(gridBtn);
+                    dynamicGrid.Children.Add(gridBtn);
+                }
+            }
+
+            createMenu(stackPanel);
+            stackPanel.Children.Add(dynamicGrid);
+
+            //Adds grid to the next window about to be opened
+            customWindow.Content = stackPanel;
+
+
+            customWindow.Show();
+        }
+
+        private void createMenu(StackPanel s)
+        {
+            Menu customMenu = new Menu();
+            var combo = new ComboBox();
+            var btn1 = new Button();
+            var btn2 = new Button();
+
+            customMenu.HorizontalAlignment = HorizontalAlignment.Left;
+            customMenu.VerticalAlignment = VerticalAlignment.Top;
+            customMenu.Height = 29;
+            customMenu.Width = 500;
+
+            combo.FontWeight = FontWeights.Bold;
+            combo.FontSize = 18;
+            combo.Loaded += regularComboBox;
+            combo.SelectionChanged += regularComboBox_SelectionChanged;
+
+            btn1.Content = "Rules";
+            btn1.FontWeight = FontWeights.Bold;
+            btn1.FontSize = 18;
+            btn1.Click += btn_RuleClick;
+
+            btn2.Content = "Settings";
+            btn2.FontWeight = FontWeights.Bold;
+            btn2.FontSize = 18;
+            btn2.Click += btn_SettingClick;
+
+            customMenu.Items.Add(combo);
+            customMenu.Items.Add(btn1);
+            customMenu.Items.Add(btn2);
+
+
+            s.Children.Add(customMenu);
+
+
+            /*<Menu Name="RegularMenu" HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" Width="492">
+            <ComboBox FontWeight="Bold" FontSize="18" BorderThickness="0" Loaded="regularComboBox" SelectionChanged="regularComboBox_SelectionChanged"></ComboBox>
+            <Button Content="Rules" FontWeight="Bold" FontSize="18" BorderThickness="0"  Click="btn_RuleClick"></Button>
+            <Button Content="Settings" FontWeight="Bold" FontSize="18" BorderThickness="0"  Click="btn_SettingClick"/>
+            </Menu>*/
+        }
+
         //Method that fills the combobox with elements
         //This is called when window loads
         private void regularComboBox(object sender, RoutedEventArgs e)
@@ -83,12 +177,36 @@ namespace Tic_Tac_Toe
         private void Colors_OnLoaded(object sender, RoutedEventArgs e)
         {
             //Sets the background and foreground color of all buttons using the startup variables
-            foreach (Button btn in this.myGrid.Children.OfType<Button>())
+            foreach (Button btn in board)
             {
                 btn.Background = (Brush)Application.Current.Properties["Background"];
                 btn.Foreground = (Brush)Application.Current.Properties["FontColor"];
             }
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //Creates a new button
+            Button btn = sender as Button;
+
+            //If btn already has an X or O in it then it will just return
+            if (btn.Content != null)
+                return;
+
+            //Prints an X or O to the button that is pressed
+            btn.Content = playerTurn ? "X" : "O";
+
+
+            //TODO
+            //Use this to get exact coordinates of users play and return that for logistics
+            //This section of code can be used to obtain the coordinates of the where the user has placed an X or O
+            /*var col = Grid.GetColumn(btn);
+            var row = Grid.GetRow(btn);*/
+
+
+            //Flips this bool so that it switches between X and O
+            playerTurn = !playerTurn;
         }
 
         //Method that handles the event of a button click 

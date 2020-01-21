@@ -7,7 +7,8 @@
         xmlns:local="clr-namespace:Tic_Tac_Toe"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
-        Name="Window1">
+        Name="Window1"
+        WindowStartupLocation="CenterScreen">
     <Grid Name="mainGrid" Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

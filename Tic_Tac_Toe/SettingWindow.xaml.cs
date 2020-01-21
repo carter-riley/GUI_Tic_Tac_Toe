@@ -94,6 +94,7 @@ namespace Tic_Tac_Toe
             MainWindow mainWindow = new MainWindow();
             RegularWindow regularWindow = new RegularWindow(String.Empty);
             UltimateWindow ultimateWindow = new UltimateWindow(String.Empty);
+            CustomWindow customWindow = new CustomWindow();
 
             //This conditional is used to open the previous window that was open before the settings window
             if ((string)Application.Current.Properties["WindowIndex"] == mainWindow.Name)
@@ -121,6 +122,14 @@ namespace Tic_Tac_Toe
 
                 ultimateWindow.Show();
 
+            }
+            else if ((string)Application.Current.Properties["WindowIndex"] == customWindow.Name)
+            {
+                //Setting these variables will set the background and foreground color for this window
+                Application.Current.Properties["Background"] = settingGrid.Background;
+                Application.Current.Properties["FontColor"] = settingLabel.Foreground;
+
+                customWindow.createWindow(customWindow);
             }
 
             //Closes the setting window

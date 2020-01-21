@@ -104,6 +104,7 @@ namespace Tic_Tac_Toe
                 //Sets background and foreground color
                 mainWindow.mainGrid.Background = settingGrid.Background;
                 mainWindow.title.Foreground = settingLabel.Foreground;
+                mainWindow.boardLabel.Foreground = settingLabel.Foreground;
             }
             else if ((string)Application.Current.Properties["WindowIndex"] == regularWindow.Name)
             {

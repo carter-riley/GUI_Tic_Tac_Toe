@@ -40,9 +40,8 @@ namespace Tic_Tac_Toe
             data.Add("Revenge Tic-tac-toe");
             data.Add("Random Tic-tac-toe");
             data.Add("Ultimate Tic-tac-toe");
-            data.Add("Custom Board");
             
-
+            
             //Get the ComboBox reference.
             var comboBox = sender as ComboBox;
 
@@ -63,35 +62,53 @@ namespace Tic_Tac_Toe
             // Set SelectedItem as Window Title.
             string value = comboBox.SelectedItem as string;
 
-            if (value == "Play")
+
+            if (mainText.Text == "")
             {
-                //We don't want the program to do anything if play is selected so it returns here
-                return;
+                if (value == "Play")
+                {
+                    //We don't want the program to do anything if play is selected so it returns here
+                    return;
+                }
+                else if (value == "Normal Tic-tac-toe" ||
+                         value == "Misere Tic-tac-toe (Avoidance Tic-tac-toe)" ||
+                         value == "Misere Tic-tac-toe (Avoidance Tic-tac-toe)" ||
+                         value == "Nokato Tic-tac-toe" ||
+                         value == "Wild Tic-tac-toe (Your Choice Tic-tac-toe)" ||
+                         value == "Devil's Tic-tac-toe" ||
+                         value == "Revenge Tic-tac-toe" ||
+                         value == "Random Tic-tac-toe")
+                {
+                    //Creates the new Window
+                    RegularWindow regularWindow = new RegularWindow(value);
+
+                    //Closes initial window
+                    this.Close();
+
+                    //These startup variables should be colors
+                    //Assigns these variables so the next window that is open can use them to have the same colors
+                    Application.Current.Properties["Background"] = mainGrid.Background;
+                    Application.Current.Properties["FontColor"] = title.Foreground;
+
+                    //Show next window
+                    regularWindow.Show();
+                }
+                else if (value == "Ultimate Tic-tac-toe")
+                {
+                    UltimateWindow ultimateWindow = new UltimateWindow(value);
+
+                    this.Close();
+
+                    //These startup variables should be colors
+                    //Assigns these variables so the next window that is open can use them to have the same colors
+                    Application.Current.Properties["Background"] = mainGrid.Background;
+                    Application.Current.Properties["FontColor"] = title.Foreground;
+
+                    //Show next window
+                    ultimateWindow.Show();
+                }
             }
-            else if(value == "Normal Tic-tac-toe" || 
-                    value == "Misere Tic-tac-toe (Avoidance Tic-tac-toe)" ||
-                    value =="Misere Tic-tac-toe (Avoidance Tic-tac-toe)" ||
-                    value == "Nokato Tic-tac-toe" ||
-                    value == "Wild Tic-tac-toe (Your Choice Tic-tac-toe)" ||
-                    value == "Devil's Tic-tac-toe" ||
-                    value == "Revenge Tic-tac-toe" ||
-                    value =="Random Tic-tac-toe")
-            {
-                //Creates the new Window
-                RegularWindow regularWindow = new RegularWindow(value);
-
-                //Closes initial window
-                this.Close();
-
-                //These startup variables should be colors
-                //Assigns these variables so the next window that is open can use them to have the same colors
-                Application.Current.Properties["Background"] = mainGrid.Background;
-                Application.Current.Properties["FontColor"] = title.Foreground;
-
-                //Show next window
-                regularWindow.Show();
-            }
-            else if(value == "Ultimate Tic-tac-toe")
+            else if (value == "Ultimate Tic-tac-toe")
             {
                 UltimateWindow ultimateWindow = new UltimateWindow(value);
 
@@ -105,18 +122,21 @@ namespace Tic_Tac_Toe
                 //Show next window
                 ultimateWindow.Show();
             }
-            else if (value == "Custom Board")
+            else
             {
-                CustomChoiceWindow customChoiceWindow = new CustomChoiceWindow();
-                
-                this.Close();
+                Application.Current.Properties["BoardSize"] = int.Parse(mainText.Text);
 
-                //These startup variables should be colors
+                CustomWindow customWindow = new CustomWindow();
+
+               //These startup variables should be colors
                 //Assigns these variables so the next window that is open can use them to have the same colors
                 Application.Current.Properties["Background"] = mainGrid.Background;
                 Application.Current.Properties["FontColor"] = title.Foreground;
 
-                customChoiceWindow.Show();
+                //Closes first window opens another
+                this.Close();
+
+                customWindow.createWindow(customWindow);
             }
         }
 

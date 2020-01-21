@@ -28,7 +28,7 @@
             Loaded="ComboBox_Loaded"
             SelectionChanged="ComboBox_SelectionChanged"/>
         <Button Content="Close" Click="btn_CloseClick"  HorizontalAlignment="Left" Margin="197,139,0,0" VerticalAlignment="Top" Width="49"/>
-        <Label Name="backLabel" Foreground="Black" Content="Background" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontWeight="UltraBold" Margin="52,66,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Name="fontLabel" Foreground="Black" Content="Font" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontWeight="UltraBold" Margin="272,66,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Name="backLabel" Foreground="Black" Content="Background Color" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontWeight="UltraBold" Margin="52,66,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Name="fontLabel" Foreground="Black" Content="Font Color" HorizontalContentAlignment="Center" HorizontalAlignment="Left" FontWeight="UltraBold" Margin="272,66,0,0" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>

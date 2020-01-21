@@ -111,11 +111,6 @@ namespace Tic_Tac_Toe
             s.Children.Add(customMenu);
 
 
-            /*<Menu Name="RegularMenu" HorizontalAlignment="Left" Height="29" VerticalAlignment="Top" Width="492">
-            <ComboBox FontWeight="Bold" FontSize="18" BorderThickness="0" Loaded="regularComboBox" SelectionChanged="regularComboBox_SelectionChanged"></ComboBox>
-            <Button Content="Rules" FontWeight="Bold" FontSize="18" BorderThickness="0"  Click="btn_RuleClick"></Button>
-            <Button Content="Settings" FontWeight="Bold" FontSize="18" BorderThickness="0"  Click="btn_SettingClick"/>
-            </Menu>*/
         }
 
         //Method that fills the combobox with elements
@@ -167,6 +162,7 @@ namespace Tic_Tac_Toe
                 //Sets background and foreground color
                 mainWindow.mainGrid.Background = (Brush)Application.Current.Properties["Background"];
                 mainWindow.title.Foreground = (Brush)Application.Current.Properties["FontColor"];
+                mainWindow.boardLabel.Foreground = (Brush)Application.Current.Properties["FontColor"];
 
                 this.Close();
             }

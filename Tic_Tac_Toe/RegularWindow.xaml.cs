@@ -89,6 +89,7 @@ namespace Tic_Tac_Toe
                 //Sets background and foreground color
                 mainWindow.mainGrid.Background = (Brush)Application.Current.Properties["Background"];
                 mainWindow.title.Foreground = (Brush) Application.Current.Properties["FontColor"];
+                mainWindow.boardLabel.Foreground = (Brush)Application.Current.Properties["FontColor"];
 
                 this.Close();
             }

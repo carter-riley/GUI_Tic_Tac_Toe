@@ -135,7 +135,6 @@ C:\Users\rkeopuhiwa21\Desktop\GUI_Tic_Tac_Toe\Tic_Tac_Toe\bin\Debug\Tic_Tac_Toe.
 C:\Users\rkeopuhiwa21\Desktop\GUI_Tic_Tac_Toe\Tic_Tac_Toe\bin\Debug\Tic_Tac_Toe.exe
 C:\Users\rkeopuhiwa21\Desktop\GUI_Tic_Tac_Toe\Tic_Tac_Toe\bin\Debug\Tic_Tac_Toe.pdb
 C:\Users\rkeopuhiwa21\Desktop\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\Tic_Tac_Toe.csprojAssemblyReference.cache
-C:\Users\rkeopuhiwa21\Desktop\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\CustomChoiceWindow.g.cs
 C:\Users\rkeopuhiwa21\Desktop\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\CustomWindow.g.cs
 C:\Users\rkeopuhiwa21\Desktop\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\MainWindow.g.cs
 C:\Users\rkeopuhiwa21\Desktop\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\RegularWindow.g.cs
@@ -144,7 +143,6 @@ C:\Users\rkeopuhiwa21\Desktop\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\UltimateWind
 C:\Users\rkeopuhiwa21\Desktop\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\App.g.cs
 C:\Users\rkeopuhiwa21\Desktop\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\Tic_Tac_Toe_MarkupCompile.cache
 C:\Users\rkeopuhiwa21\Desktop\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\Tic_Tac_Toe_MarkupCompile.lref
-C:\Users\rkeopuhiwa21\Desktop\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\CustomChoiceWindow.baml
 C:\Users\rkeopuhiwa21\Desktop\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\CustomWindow.baml
 C:\Users\rkeopuhiwa21\Desktop\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\MainWindow.baml
 C:\Users\rkeopuhiwa21\Desktop\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\RegularWindow.baml

@@ -17,15 +17,20 @@
         <Border BorderBrush="Black" BorderThickness="4" Grid.Column="1" HorizontalAlignment="Left" Height="300" Margin="38,31,0,0" VerticalAlignment="Top" Width="330">
             <Image Source="download.jpg" Stretch="Fill"/>
         </Border>
-        <Label Name="title"  Content="Tic-Tac-Toe Simulator" FontSize="32" HorizontalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" Height="62" Margin="38,347,0,0" VerticalAlignment="Top" Width="330"/>
-        
+        <Label Name="title"  Content="Tic-Tac-Toe Simulator" FontWeight="Bold" FontSize="32" HorizontalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" Height="62" Margin="25,347,0,0" VerticalAlignment="Top" Width="343"/>
+
         <ComboBox
             HorizontalAlignment="Left"
-            Margin="160,200,0,0"
+            Margin="188,206,0,0"
             VerticalAlignment="Top"
+            HorizontalContentAlignment="Left"
+            VerticalContentAlignment="Center"
             Width="120"
+            FontSize="15"
             Loaded="ComboBox_Loaded"
-            SelectionChanged="ComboBox_SelectionChanged"/>
-        <Button Content="Settings" HorizontalAlignment="Left" Margin="296,372,0,0" VerticalAlignment="Top" Width="90" Click="btn_SettingClick"/>
+            SelectionChanged="ComboBox_SelectionChanged" Height="38"/>
+        <Button Content="Settings" HorizontalAlignment="Left" Margin="319,372,0,0" VerticalAlignment="Top" Width="67" Click="btn_SettingClick"/>
+        <TextBox Name="mainText" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" FontSize="15" BorderThickness="1" Height="38" Margin="142,206,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="29"/>
+        <Label Name="boardLabel" Content="Board Size (n x n)" FontWeight="Bold" FontSize="15" HorizontalAlignment="Left" Margin="5,206,0,0" VerticalAlignment="Top" Height="38" Width="137"/>
     </Grid>
 </Window>

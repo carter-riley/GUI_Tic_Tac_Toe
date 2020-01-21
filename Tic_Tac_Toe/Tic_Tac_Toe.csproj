@@ -57,9 +57,6 @@
     </ApplicationDefinition>
     <Compile Include="Cell.cs" />
     <Compile Include="Coordinates.cs" />
-    <Compile Include="CustomChoiceWindow.xaml.cs">
-      <DependentUpon>CustomChoiceWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="CustomWindow.xaml.cs">
       <DependentUpon>CustomWindow.xaml</DependentUpon>
     </Compile>
@@ -73,10 +70,6 @@
     <Compile Include="UltimateWindow.xaml.cs">
       <DependentUpon>UltimateWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="CustomChoiceWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="CustomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

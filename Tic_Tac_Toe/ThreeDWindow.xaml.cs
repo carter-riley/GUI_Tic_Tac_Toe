@@ -152,12 +152,22 @@ namespace Tic_Tac_Toe
         private void Colors_OnLoaded(object sender, RoutedEventArgs e)
         {
             //Sets the background and foreground color of all buttons using the startup variables
-            foreach (Button btn in this.RegularGrid.Children.OfType<Button>())
+            foreach (Button btn in this.Grid13d.Children.OfType<Button>())
             {
                 btn.Background = (Brush)Application.Current.Properties["Background"];
                 btn.Foreground = (Brush) Application.Current.Properties["FontColor"];
             }
-            
+            foreach (Button btn in this._3dGrid2.Children.OfType<Button>())
+            {
+                btn.Background = (Brush)Application.Current.Properties["Background"];
+                btn.Foreground = (Brush)Application.Current.Properties["FontColor"];
+            }
+            foreach (Button btn in this._3dGrid3.Children.OfType<Button>())
+            {
+                btn.Background = (Brush)Application.Current.Properties["Background"];
+                btn.Foreground = (Brush)Application.Current.Properties["FontColor"];
+            }
+
         }
 
         //Method that handles the event of a button click 

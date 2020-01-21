@@ -178,3 +178,5 @@ H:\Final\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\Tic_Tac_Toe.exe
 H:\Final\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\Tic_Tac_Toe.pdb
 H:\Final\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\ThreeDWindow.g.cs
 H:\Final\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\ThreeDWindow.baml
+C:\Users\rkeopuhiwa21\Desktop\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\ThreeDWindow.g.cs
+C:\Users\rkeopuhiwa21\Desktop\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\ThreeDWindow.baml

@@ -8,7 +8,7 @@
         Title="RegularWindow" Height="500" Width="500"
         WindowStartupLocation="CenterScreen"
         Loaded="Colors_OnLoaded"
-        Name="window2">
+        Name="_3DWindow">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -43,15 +43,15 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Button FontSize="80" Grid.Column="0" Grid.Row="0" Click="Button_Click" />
-            <Button FontSize="80" Grid.Column="1" Grid.Row="0" Click="Button_Click" />
-            <Button FontSize="80" Grid.Column="2" Grid.Row="0" Click="Button_Click"/>
-            <Button FontSize="80" Grid.Column="0" Grid.Row="1" Click="Button_Click" />
-            <Button FontSize="80" Grid.Column="1" Grid.Row="1" Click="Button_Click" />
-            <Button FontSize="80" Grid.Column="2" Grid.Row="1" Click="Button_Click"/>
-            <Button FontSize="80" Grid.Column="0" Grid.Row="2" Click="Button_Click" />
-            <Button FontSize="80" Grid.Column="1" Grid.Row="2" Click="Button_Click" />
-            <Button FontSize="80" Grid.Column="2" Grid.Row="2" Click="Button_Click"/>
+            <Button FontSize="12" Grid.Column="0" Grid.Row="0" Click="Button_Click" />
+            <Button FontSize="12" Grid.Column="1" Grid.Row="0" Click="Button_Click" />
+            <Button FontSize="12" Grid.Column="2" Grid.Row="0" Click="Button_Click"/>
+            <Button FontSize="12" Grid.Column="0" Grid.Row="1" Click="Button_Click" />
+            <Button FontSize="12" Grid.Column="1" Grid.Row="1" Click="Button_Click" />
+            <Button FontSize="12" Grid.Column="2" Grid.Row="1" Click="Button_Click"/>
+            <Button FontSize="12" Grid.Column="0" Grid.Row="2" Click="Button_Click" />
+            <Button FontSize="12" Grid.Column="1" Grid.Row="2" Click="Button_Click" />
+            <Button FontSize="12" Grid.Column="2" Grid.Row="2" Click="Button_Click"/>
 
         </Grid>
         <Grid Name="_3dGrid2" Margin="154,150,154,185" RenderTransformOrigin="0.4,0.4">
@@ -73,15 +73,15 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button FontSize="80" Grid.Column="0" Grid.Row="0" Click="Button_Click" />
-            <Button FontSize="80" Grid.Column="1" Grid.Row="0" Click="Button_Click" />
-            <Button FontSize="80" Grid.Column="2" Grid.Row="0" Click="Button_Click"/>
-            <Button FontSize="80" Grid.Column="0" Grid.Row="1" Click="Button_Click" />
-            <Button FontSize="80" Grid.Column="1" Grid.Row="1" Click="Button_Click" />
-            <Button FontSize="80" Grid.Column="2" Grid.Row="1" Click="Button_Click"/>
-            <Button FontSize="80" Grid.Column="0" Grid.Row="2" Click="Button_Click" />
-            <Button FontSize="80" Grid.Column="1" Grid.Row="2" Click="Button_Click" />
-            <Button FontSize="80" Grid.Column="2" Grid.Row="2" Click="Button_Click"/>
+            <Button FontSize="12" Grid.Column="0" Grid.Row="0" Click="Button_Click" />
+            <Button FontSize="12" Grid.Column="1" Grid.Row="0" Click="Button_Click" />
+            <Button FontSize="12" Grid.Column="2" Grid.Row="0" Click="Button_Click"/>
+            <Button FontSize="12" Grid.Column="0" Grid.Row="1" Click="Button_Click" />
+            <Button FontSize="12" Grid.Column="1" Grid.Row="1" Click="Button_Click" />
+            <Button FontSize="12" Grid.Column="2" Grid.Row="1" Click="Button_Click"/>
+            <Button FontSize="12" Grid.Column="0" Grid.Row="2" Click="Button_Click" />
+            <Button FontSize="12" Grid.Column="1" Grid.Row="2" Click="Button_Click" />
+            <Button FontSize="12" Grid.Column="2" Grid.Row="2" Click="Button_Click"/>
         </Grid>
         <Grid x:Name="_3dGrid3" Margin="154,300,154,35" RenderTransformOrigin="0.4,0.4">
             <Grid.RenderTransform>
@@ -104,15 +104,15 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Button FontSize="80" Grid.Column="0" Grid.Row="0" Click="Button_Click" />
-            <Button FontSize="80" Grid.Column="1" Grid.Row="0" Click="Button_Click" />
-            <Button FontSize="80" Grid.Column="2" Grid.Row="0" Click="Button_Click"/>
-            <Button FontSize="80" Grid.Column="0" Grid.Row="1" Click="Button_Click" />
-            <Button FontSize="80" Grid.Column="1" Grid.Row="1" Click="Button_Click" />
-            <Button FontSize="80" Grid.Column="2" Grid.Row="1" Click="Button_Click"/>
-            <Button FontSize="80" Grid.Column="0" Grid.Row="2" Click="Button_Click" />
-            <Button FontSize="80" Grid.Column="1" Grid.Row="2" Click="Button_Click" />
-            <Button FontSize="80" Grid.Column="2" Grid.Row="2" Click="Button_Click"/>
+            <Button FontSize="12" Grid.Column="0" Grid.Row="0" Click="Button_Click" />
+            <Button FontSize="12" Grid.Column="1" Grid.Row="0" Click="Button_Click" />
+            <Button FontSize="12" Grid.Column="2" Grid.Row="0" Click="Button_Click"/>
+            <Button FontSize="12" Grid.Column="0" Grid.Row="1" Click="Button_Click" />
+            <Button FontSize="12" Grid.Column="1" Grid.Row="1" Click="Button_Click" />
+            <Button FontSize="12" Grid.Column="2" Grid.Row="1" Click="Button_Click"/>
+            <Button FontSize="12" Grid.Column="0" Grid.Row="2" Click="Button_Click" />
+            <Button FontSize="12" Grid.Column="1" Grid.Row="2" Click="Button_Click" />
+            <Button FontSize="12" Grid.Column="2" Grid.Row="2" Click="Button_Click"/>
         </Grid>
 
         <Menu Name="RegularMenu"  Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="29" Margin="0,-29,-1,0" VerticalAlignment="Top" Width="493">

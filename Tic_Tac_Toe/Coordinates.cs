@@ -26,7 +26,7 @@ namespace Tic_Tac_Toe
          * @param row, col column coordinate and int row coordinate
          * @return nothing
          */
-        public Coordinates(int col, int row)
+        public Coordinates(int row, int col)
         {
             this.row = row;
             this.col = col;

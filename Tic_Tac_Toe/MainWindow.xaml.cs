@@ -40,8 +40,8 @@ namespace Tic_Tac_Toe
             data.Add("Revenge Tic-tac-toe");
             data.Add("Random Tic-tac-toe");
             data.Add("Ultimate Tic-tac-toe");
-            
-            
+            data.Add("3D Tic-tac-toe");
+
             //Get the ComboBox reference.
             var comboBox = sender as ComboBox;
 
@@ -106,6 +106,20 @@ namespace Tic_Tac_Toe
 
                     //Show next window
                     ultimateWindow.Show();
+                }
+                else if (value == "3D Tic-tac-toe")
+                {
+                    ThreeDWindow threeDWindow = new ThreeDWindow(value);
+
+                    this.Close();
+
+                    //These startup variables should be colors
+                    //Assigns these variables so the next window that is open can use them to have the same colors
+                    Application.Current.Properties["Background"] = mainGrid.Background;
+                    Application.Current.Properties["FontColor"] = title.Foreground;
+
+                    //Show next window
+                    threeDWindow.Show();
                 }
             }
             else if (value == "Ultimate Tic-tac-toe")

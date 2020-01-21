@@ -60,6 +60,9 @@
     <Compile Include="CustomWindow.xaml.cs">
       <DependentUpon>CustomWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ThreeDWindow.xaml.cs">
+      <DependentUpon>ThreeDWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegularWindow.xaml.cs">
       <DependentUpon>RegularWindow.xaml</DependentUpon>
     </Compile>
@@ -86,6 +89,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ThreeDWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="RegularWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

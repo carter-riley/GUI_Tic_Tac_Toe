@@ -20,8 +20,16 @@ namespace Tic_Tac_Toe
     /// </summary>
     public partial class SettingWindow : Window
     {
+        private string gameMode;
+
         public SettingWindow()
         {
+            InitializeComponent();
+        }
+
+        public SettingWindow(string mode)
+        {
+            gameMode = mode;
             InitializeComponent();
         }
 
@@ -92,7 +100,7 @@ namespace Tic_Tac_Toe
         private void btn_CloseClick(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
-            RegularWindow regularWindow = new RegularWindow(String.Empty);
+            RegularWindow regularWindow = new RegularWindow(gameMode);
             UltimateWindow ultimateWindow = new UltimateWindow(String.Empty);
             CustomWindow customWindow = new CustomWindow();
             ThreeDWindow threeDWindow = new ThreeDWindow(String.Empty);

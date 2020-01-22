@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Carte\Documents\final\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\
+C:\Users\rkeopuhiwa21\Desktop\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\
 Tic_Tac_Toe
 none
 false
 DEBUG;TRACE
-C:\Users\Carte\Documents\final\GUI_Tic_Tac_Toe\Tic_Tac_Toe\App.xaml
-6-1452298497
+C:\Users\rkeopuhiwa21\Desktop\GUI_Tic_Tac_Toe\Tic_Tac_Toe\App.xaml
+7-1542774083
 
-17-1484758156
+15-31472181
 13-1505183044
-CustomWindow.xaml;MainWindow.xaml;ThreeDWindow.xaml;RegularWindow.xaml;SettingWindow.xaml;UltimateWindow.xaml;
+CustomWindow.xaml;MainWindow.xaml;RuleWindow.xaml;ThreeDWindow.xaml;RegularWindow.xaml;SettingWindow.xaml;UltimateWindow.xaml;
 
-True
+False
 

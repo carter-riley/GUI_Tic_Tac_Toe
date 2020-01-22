@@ -1,5 +1,7 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -106,6 +108,7 @@ namespace Tic_Tac_Toe
 
             if(gameOver) {
                 MessageBox.Show("The game is over.");
+                playAgainMessage();
                 return;
             }
             //Creates a new button
@@ -122,7 +125,11 @@ namespace Tic_Tac_Toe
                 if (mode == "Nokato Tic-tac-toe") {
                     gameBoard.makeMove(location, 'X' , mode);
                     btn.Content = "X";
-                } else
+                }else if (mode == "Wild Tic-tac-toe (Your Choice Tic-tac-toe)" || mode == "Devil's Tic-tac-toe") //This else-if statement is used for player choice variants of tic-tac-toe
+                {
+                     btn.Content = playerChoiceMessage();
+                } 
+                else
                 {
                     gameBoard.makeMove(location, playerTurn ? 'X' : 'O', mode);
                     btn.Content = playerTurn ? "X" : "O";
@@ -131,6 +138,7 @@ namespace Tic_Tac_Toe
                 {
                     if (gameBoard.isWinner(playerTurn ? 'X' : 'O', mode))
                     {
+                                               
                         MessageBox.Show((playerTurn ? "X" : "O") + " Lost!");
                         gameOver = true;
                     }
@@ -152,11 +160,15 @@ namespace Tic_Tac_Toe
                             {
                                 MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
                                 gameOver = true;
+                                playAgainMessage();
+                                return;
                             }
                             if (moveCounter == 9)
                             {
                                 MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
                                 gameOver = true;
+                                playAgainMessage();
+                                return;
                             }
                             else
                             {
@@ -172,22 +184,29 @@ namespace Tic_Tac_Toe
                             {
                                 MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
                                 gameOver = true;
+                                playAgainMessage();
+                                return;
                             }
                             else
                             {
                                 MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
                                 gameOver = true;
+                                playAgainMessage();
+                                return;
                             }
                         }
                     } else if(oneMoreTurn)
                     {
                         MessageBox.Show((!playerTurn ? "X" : "O") + " Won!");
                         gameOver = true;
+                        playAgainMessage();
+                        return;
                     }
                 } if(3*3 == moveCounter)
                 {
                     MessageBox.Show("Cats game, nobody won!");
                     gameOver = true;
+                    playAgainMessage();
                 }
             }
             else
@@ -239,35 +258,39 @@ namespace Tic_Tac_Toe
         //Used for the Rules button
         private void btn_RuleClick(object sender, RoutedEventArgs e)
         {
+
+            RuleWindow ruleWindow;
             //Pops up a message box that displays the rules of the chosen game
             //*********Replace with actual rules
             switch (mode)
             {
                 case "Normal Tic-tac-toe":
-                    MessageBox.Show("The object of Tic Tac Toe is to get three in a row. You play on a three by three game board. The first player is known as X and the second is O. Players alternate placing Xs and Os on the game board until either opponent has three in a row or all nine squares are filled. X always goes first, and in the event that no one has three in a row, the stalemate is called a cat game");
+                    ruleWindow = new RuleWindow("The object of Tic Tac Toe is to get three in a row. You play on a three by three game board. The first player is known as X and the second is O. Players alternate placing Xs and Os on the game board until either opponent has three in a row or all nine squares are filled. X always goes first, and in the event that no one has three in a row, the stalemate is called a cat game");
                     break;
                 case "Misere Tic-tac-toe (Avoidance Tic-tac-toe)":
-                    MessageBox.Show("The object of Misere Tic-tac-toe (Avoidance Tic-tac-toe) is to avoid getting three in a row. You play on a three by three game board. The first player is known as X and the second is O. Players alternate placing Xs and Os on the game board until either opponent has three in a row or all nine squares are filled. X always goes first, and in the event that no one has three in a row, the stalemate is called a cat game");
+                    ruleWindow = new RuleWindow("The object of Misere Tic-tac-toe (Avoidance Tic-tac-toe) is to avoid getting three in a row. You play on a three by three game board. The first player is known as X and the second is O. Players alternate placing Xs and Os on the game board until either opponent has three in a row or all nine squares are filled. X always goes first, and in the event that no one has three in a row, the stalemate is called a cat game");
                     break;
                 case "Nokato Tic-tac-toe":
-                    MessageBox.Show("The object of Nokato Tic-tac-toe is to avoid getting three in a row. You play on a three by three game board. Both players are X. Players alternate placing Xs on the game board until one of the players gets three in a row and loses.");
+                    ruleWindow = new RuleWindow("The object of Nokato Tic-tac-toe is to avoid getting three in a row. You play on a three by three game board. Both players are X. Players alternate placing Xs on the game board until one of the players gets three in a row and loses.");
                     break;
                 case "Wild Tic-tac-toe (Your Choice Tic-tac-toe)":
-                    MessageBox.Show("The object of Wild Tic-tac-toe (Your Choice Tic-tac-toe) is to get three in a row. You play on a three by three game board. Player 1 an player 2 get to choose wether to place an X or an O each turn. Players placing Xs or Os on the game board until either an opponent has three in a row or all nine squares are filled. Player 1 goes first, and in the event that no one has three in a row, the stalemate is called a cat game");
+                    ruleWindow = new RuleWindow("The object of Wild Tic-tac-toe (Your Choice Tic-tac-toe) is to get three in a row. You play on a three by three game board. Player 1 an player 2 get to choose wether to place an X or an O each turn. Players placing Xs or Os on the game board until either an opponent has three in a row or all nine squares are filled. Player 1 goes first, and in the event that no one has three in a row, the stalemate is called a cat game");
                     break;
                 case "Devil's Tic-tac-toe":
-                    MessageBox.Show("The object of Devil's Tic-tac-toe is to avoid getting three in a row. You play on a three by three game board. Player 1 an player 2 get to choose wether to place an X or an O each turn. Players placing Xs or Os on the game board until either an opponent has three in a row or all nine squares are filled. Player 1 goes first, and in the event that no one has three in a row, the stalemate is called a cat game");
+                    ruleWindow = new RuleWindow("The object of Devil's Tic-tac-toe is to avoid getting three in a row. You play on a three by three game board. Player 1 an player 2 get to choose wether to place an X or an O each turn. Players placing Xs or Os on the game board until either an opponent has three in a row or all nine squares are filled. Player 1 goes first, and in the event that no one has three in a row, the stalemate is called a cat game");
                     break;
                 case "Revenge Tic-tac-toe":
-                    MessageBox.Show("The object of Revenge Tic-tac-toe is to get three in a row without your opponent getting three-in-a-row in the next turn. If a player gets three in a row, their opponent has one more turn to try and get three in a row and if they are able to, they win. You play on a three by three game board. The first player is known as X and the second is O. Players alternate placing Xs and Os on the game board until either opponent has three in a row or all nine squares are filled. X always goes first, and in the event that no one has three in a row, the stalemate is called a cat game");
+                    ruleWindow = new RuleWindow("The object of Revenge Tic-tac-toe is to get three in a row without your opponent getting three-in-a-row in the next turn. If a player gets three in a row, their opponent has one more turn to try and get three in a row and if they are able to, they win. You play on a three by three game board. The first player is known as X and the second is O. Players alternate placing Xs and Os on the game board until either opponent has three in a row or all nine squares are filled. X always goes first, and in the event that no one has three in a row, the stalemate is called a cat game");
                     break;
                 case "Random Tic-tac-toe":
-                    MessageBox.Show("The object of Random Tic-tac-toe is to get three in a row. A randon player is chosen to play each turn. You play on a three by three game board. The first player is known as X and the second is O. Players alternate placing Xs and Os on the game board until either opponent has three in a row or all nine squares are filled. In the event that no one has three in a row, the stalemate is called a cat game");
+                    ruleWindow = new RuleWindow("The object of Random Tic-tac-toe is to get three in a row. A random player is chosen to play each turn. You play on a three by three game board. The first player is known as X and the second is O. Players alternate placing Xs and Os on the game board until either opponent has three in a row or all nine squares are filled. In the event that no one has three in a row, the stalemate is called a cat game");
                     break;
                 default:
-                    MessageBox.Show("No Game mode detected");
+                    ruleWindow = new RuleWindow("No Game mode detected");
                     break;
             }
+
+            ruleWindow.Show();
         }
 
         //Method that handles the event of a button click
@@ -275,7 +298,7 @@ namespace Tic_Tac_Toe
         private void btn_SettingClick(object sender, RoutedEventArgs e)
         {
             //Creates a new window
-            SettingWindow settingWindow = new SettingWindow();
+            SettingWindow settingWindow = new SettingWindow(mode);
             
             //Shows new window
             settingWindow.Show();
@@ -285,6 +308,60 @@ namespace Tic_Tac_Toe
             //Closes this window
             this.Close();
 
+        }
+
+        //Method that creates a message box with buttons for the user to select if they want to place and X or O
+        //It is mainly used for player choice variants
+        //Returns a string with the player choice which is either an X or O
+        private string playerChoiceMessage()
+        {
+            //Creates a message box with buttons
+            MessageBoxResult playAgainBoxResult = MessageBox.Show("Select |Yes| for X and |No| for O", "X or O", MessageBoxButton.YesNo);
+
+            
+            if (playAgainBoxResult == MessageBoxResult.Yes)
+            {
+                return "X";
+            }
+
+            return "O";
+        }
+
+        //Method that creates a message box with buttons
+        //Used to ask the user if they want to play again or not
+        private void playAgainMessage()
+        {
+            //Creates a message box with buttons
+            MessageBoxResult playAgainBoxResult =
+                MessageBox.Show("Do you want to play again?", "Play Again", MessageBoxButton.YesNo);
+
+            //If user says yes then it clears the board
+            if (playAgainBoxResult == MessageBoxResult.Yes)
+            {
+                foreach (Button btn in this.RegularGrid.Children.OfType<Button>())
+                {
+                    btn.Content = "";
+                }
+
+                gameOver = false;
+                gameBoard = null;
+                gameBoard = new TicTacToeBoard(3, 0);
+                playerTurn = true;
+                moveCounter = 0;
+            }
+            else if (playAgainBoxResult == MessageBoxResult.No) //If user says no then it closes window and opens main window
+            {
+                MainWindow mainWindow = new MainWindow();
+
+                mainWindow.Show();
+
+                //Sets background and foreground color
+                mainWindow.mainGrid.Background = btn1.Background;
+                mainWindow.title.Foreground = btn1.Foreground;
+                mainWindow.boardLabel.Foreground = btn1.Foreground;
+
+                this.Close();
+            }
         }
     }
 }

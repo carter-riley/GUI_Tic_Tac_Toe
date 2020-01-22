@@ -159,7 +159,7 @@ namespace Tic_Tac_Toe
         private void btn_SettingClick(object sender, RoutedEventArgs e)
         {
             //Creates a new window
-            SettingWindow settingWindow = new SettingWindow();
+            SettingWindow settingWindow = new SettingWindow(mode);
 
             //Shows new window
             settingWindow.Show();

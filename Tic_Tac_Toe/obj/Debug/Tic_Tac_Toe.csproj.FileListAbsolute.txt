@@ -205,3 +205,5 @@ C:\Users\Carte\Documents\final\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\Tic_Tac_Toe
 C:\Users\Carte\Documents\final\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\Tic_Tac_Toe.csproj.CoreCompileInputs.cache
 C:\Users\Carte\Documents\final\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\Tic_Tac_Toe.exe
 C:\Users\Carte\Documents\final\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\Tic_Tac_Toe.pdb
+C:\Users\rkeopuhiwa21\Desktop\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\RuleWindow.g.cs
+C:\Users\rkeopuhiwa21\Desktop\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\RuleWindow.baml

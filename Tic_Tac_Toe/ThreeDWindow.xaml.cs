@@ -29,7 +29,7 @@ namespace Tic_Tac_Toe
         {
             mode = gameMode;
             InitializeComponent();
-            gameBoard = new TicTacToeBoard(3, 0);
+            gameBoard = new TicTacToeBoard(3, 8);
             // MessageBox.Show("Player X is going first.");
         }
 
@@ -108,7 +108,7 @@ namespace Tic_Tac_Toe
             //Creates a new button
             Button btn = sender as Button;
 
-            Coordinates location = new Coordinates(Grid.GetRow(btn), Grid.GetColumn(btn));
+            Coordinates location = new Coordinates(Grid.GetRow(btn), Grid.GetColumn(btn), Int32.Parse(btn.Name.Substring(2,1)));
             // if (btn.Content != null)
 
 

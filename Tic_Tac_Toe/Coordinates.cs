@@ -10,6 +10,7 @@ namespace Tic_Tac_Toe
     {
         public int row { get; set; }
         public int col { get; set; }
+        public int depth { get; set; }
 
         /**
          * Coordinates default value constructor sets the value for the current Column coordinate
@@ -19,6 +20,7 @@ namespace Tic_Tac_Toe
         {
             row = 0;
             col = 0;
+            depth = -1;
         }
 
         /**
@@ -30,6 +32,14 @@ namespace Tic_Tac_Toe
         {
             this.row = row;
             this.col = col;
+            this.depth = -1;
+        }
+
+        public Coordinates(int row, int col, int depth)
+        {
+            this.row = row;
+            this.col = col;
+            this.depth = depth;
         }
 
         /**
@@ -39,7 +49,13 @@ namespace Tic_Tac_Toe
         public override string ToString()
         {
             string coordinatesStr = " ";
-            coordinatesStr += "(" + this.col + ", " + this.row + ")";
+            if (depth != -1)
+            {
+                coordinatesStr += "(" + this.row + ", " + this.col + ", " + this.depth + ")";
+            } else
+            {
+                coordinatesStr += "(" + this.row + ", " + this.col + ")";
+            }
             return coordinatesStr;
         }
 

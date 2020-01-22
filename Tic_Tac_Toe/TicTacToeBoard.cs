@@ -40,6 +40,7 @@ namespace Tic_Tac_Toe
         public int gameMode;
         public int N { get; set; }
         public Cell[,] Grid { get; set; }
+        public Cell[,,] ThreeDGrid { get; set; }
 
         public TicTacToeBoard()
         {
@@ -56,22 +57,34 @@ namespace Tic_Tac_Toe
 
             if (gameMode == 8)
             {
-
+                ThreeDGrid = new Cell[3, 3, 3];
+                for (int i = 0; i < N; i++)
+                {
+                    for (int j = 0; j < N; j++)
+                    {
+                        for (int k = 0; k < N; k++)
+                        {
+                            ThreeDGrid[i, j, k] = new Cell();
+                        }
+                    }
+                }
+                this.ThreeDGrid = ThreeDGrid;
             }
             else
             {
-
-            }
-            Grid = new Cell[N, N];
-            for (int i = 0; i < N; i++)
-            {
-                for (int j = 0; j < N; j++)
+                Grid = new Cell[N, N];
+                for (int i = 0; i < N; i++)
                 {
-                    Grid[i, j] = new Cell();
+                    for (int j = 0; j < N; j++)
+                    {
+                        Grid[i, j] = new Cell();
+                    }
                 }
+                this.Grid = Grid;
             }
 
-            this.Grid = Grid;
+
+            
         }
 
         public TicTacToeBoard(int mode)
@@ -118,11 +131,22 @@ namespace Tic_Tac_Toe
 
         public bool isValidMove(Coordinates location, string mode)
         {
-            if (Grid[location.row, location.col].symbol != '\0')
+            if (gameMode == 8)
             {
-                return false;
+                if(ThreeDGrid[location.row, location.col, location.depth].symbol != '\0')
+                {
+                    return false;
+                }
+                return true;
             }
-            return true;
+            else
+            {
+                if (Grid[location.row, location.col].symbol != '\0')
+                {
+                    return false;
+                }
+                return true;
+            }
         }
 
         public bool isValidMove(Coordinates location, string mode, Coordinates lastPlayerMove)
@@ -234,8 +258,16 @@ namespace Tic_Tac_Toe
 
         public void makeMove(Coordinates location, char playerSymbol, string mode)
         {
-            Cell currCell = Grid[location.row, location.col];
-            currCell.symbol = playerSymbol;
+            if (gameMode == 8)
+            {
+                Cell currCell = ThreeDGrid[location.row, location.col, location.depth];
+                currCell.symbol = playerSymbol;
+            }
+            else
+            {
+                Cell currCell = Grid[location.row, location.col];
+                currCell.symbol = playerSymbol;
+            }
         }
 
 
@@ -245,94 +277,101 @@ namespace Tic_Tac_Toe
             int counterVertical = 0;
             int counterDiagonal = 0;
 
-            // Horizontal
-            for (int i = 0; i < N; i++)
+            if (gameMode == 8)
             {
-                for (int j = 0; j < N; j++)
-                {
-                    Cell currCell = Grid[i, j];
-                    char piece = currCell.symbol;
-                    if (piece == playerSymbol)
-                    {
-                        counterHorizontal++;
-                    }
-                }
-
-                if (counterHorizontal == N)
-                {
-                    return true;
-                }
-                else
-                {
-                    counterHorizontal = 0;
-                }
-            }
-
-            // Vertical
-            for (int i = 0; i < N; i++)
-            {
-                for (int j = 0; j < N; j++)
-                {
-                    Cell currCell = Grid[i, j];
-                    char piece = currCell.symbol;
-                    if (piece == playerSymbol)
-                    {
-                        counterVertical++;
-                    }
-                }
-
-                if (counterVertical == N)
-                {
-                    return true;
-                }
-                else
-                {
-                    counterVertical = 0;
-                }
-            }
-
-            // Diagonal
-            // Top Left to Bottom Right
-            for (int j = 0; j < N; j++)
-            {
-                Cell currCell = Grid[j, j];
-                char piece = currCell.symbol;
-                if (piece == playerSymbol)
-                {
-                    counterDiagonal++;
-                }
-            }
-
-            if (counterDiagonal == N)
-            {
-                return true;
+                return false;
             }
             else
             {
-                counterDiagonal = 0;
-            }
-
-            // Bottom Left to Top Right
-            for (int i = 0; i < N; i++)
-            {
-                for (int j = N - 1; j > 0; j--)
+                // Horizontal
+                for (int i = 0; i < N; i++)
                 {
-                    Cell currCell = Grid[i, j];
+                    for (int j = 0; j < N; j++)
+                    {
+                        Cell currCell = Grid[i, j];
+                        char piece = currCell.symbol;
+                        if (piece == playerSymbol)
+                        {
+                            counterHorizontal++;
+                        }
+                    }
+
+                    if (counterHorizontal == N)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        counterHorizontal = 0;
+                    }
+                }
+
+                // Vertical
+                for (int i = 0; i < N; i++)
+                {
+                    for (int j = 0; j < N; j++)
+                    {
+                        Cell currCell = Grid[i, j];
+                        char piece = currCell.symbol;
+                        if (piece == playerSymbol)
+                        {
+                            counterVertical++;
+                        }
+                    }
+
+                    if (counterVertical == N)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        counterVertical = 0;
+                    }
+                }
+
+                // Diagonal
+                // Top Left to Bottom Right
+                for (int j = 0; j < N; j++)
+                {
+                    Cell currCell = Grid[j, j];
                     char piece = currCell.symbol;
                     if (piece == playerSymbol)
                     {
                         counterDiagonal++;
                     }
-
                 }
-            }
 
-            if (counterDiagonal == N)
-            {
-                return true;
-            }
+                if (counterDiagonal == N)
+                {
+                    return true;
+                }
+                else
+                {
+                    counterDiagonal = 0;
+                }
 
-            return false;
+                // Bottom Left to Top Right
+                for (int i = 0; i < N; i++)
+                {
+                    for (int j = N - 1; j > 0; j--)
+                    {
+                        Cell currCell = Grid[i, j];
+                        char piece = currCell.symbol;
+                        if (piece == playerSymbol)
+                        {
+                            counterDiagonal++;
+                        }
+
+                    }
+                }
+
+                if (counterDiagonal == N)
+                {
+                    return true;
+                }
+
+                return false;
+            }
         }
 
         /*

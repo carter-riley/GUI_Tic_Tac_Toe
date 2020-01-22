@@ -24,6 +24,7 @@ namespace Tic_Tac_Toe
         private TicTacToeBoard gameBoard;
         private int moveCounter = 0;
         private string mode;
+        private bool oneMoreTurn = false;
 
         public RegularWindow(string gameMode)
         {
@@ -101,6 +102,8 @@ namespace Tic_Tac_Toe
             //This method is for the game board
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+
+
             if(gameOver) {
                 MessageBox.Show("The game is over.");
                 return;
@@ -116,12 +119,74 @@ namespace Tic_Tac_Toe
             {
                 moveCounter++;
                 // MessageBox.Show("Move counter is: " + moveCounter);
-                gameBoard.makeMove(location, playerTurn ? 'X' : 'O', mode);
-                btn.Content = playerTurn ? "X" : "O";
-
-                if (gameBoard.isWinner(playerTurn ? 'X' : 'O', mode))
+                if (mode == "Nokato Tic-tac-toe") {
+                    gameBoard.makeMove(location, 'X' , mode);
+                    btn.Content = "X";
+                } else
                 {
-                    MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
+                    gameBoard.makeMove(location, playerTurn ? 'X' : 'O', mode);
+                    btn.Content = playerTurn ? "X" : "O";
+                }
+                if (mode == "Misere Tic-tac-toe (Avoidance Tic-tac-toe)")
+                {
+                    if (gameBoard.isWinner(playerTurn ? 'X' : 'O', mode))
+                    {
+                        MessageBox.Show((playerTurn ? "X" : "O") + " Lost!");
+                        gameOver = true;
+                    }
+                } else if (mode == "Nokato Tic-tac-toe") {
+
+                    if (gameBoard.isWinner('X', mode))
+                    {
+                        MessageBox.Show((playerTurn ? "Player 1" : "Player 2") + " Lost!");
+                        gameOver = true;
+                    }
+                }
+                else
+                {
+                    if (gameBoard.isWinner(playerTurn ? 'X' : 'O', mode))
+                    {
+                        if (mode == "Revenge Tic-tac-toe")
+                        {
+                            if(oneMoreTurn)
+                            {
+                                MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
+                                gameOver = true;
+                            }
+                            if (moveCounter == 9)
+                            {
+                                MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
+                                gameOver = true;
+                            }
+                            else
+                            {
+                                MessageBox.Show(playerTurn ? "X" : "O" + " has one more chance to win or else they lose.");
+                                playerTurn = !playerTurn;
+                                oneMoreTurn = true;
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            if (moveCounter == 9)
+                            {
+                                MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
+                                gameOver = true;
+                            }
+                            else
+                            {
+                                MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
+                                gameOver = true;
+                            }
+                        }
+                    } else if(oneMoreTurn)
+                    {
+                        MessageBox.Show((!playerTurn ? "X" : "O") + " Won!");
+                        gameOver = true;
+                    }
+                } if(3*3 == moveCounter)
+                {
+                    MessageBox.Show("Cats game, nobody won!");
                     gameOver = true;
                 }
             }
@@ -137,14 +202,24 @@ namespace Tic_Tac_Toe
             //Prints an X or O to the button that is pressed
 
 
-        
+
             //TODO
             //Use this to get exact coordinates of users play and return that for logistics
             //This section of code can be used to obtain the coordinates of the where the user has placed an X or O
 
 
             //Flips this bool so that it switches between X and O
-            playerTurn = !playerTurn;
+
+            if (mode == "Random Tic-tac-toe" && !gameOver)
+            {
+                Random random = new Random();
+                playerTurn = Convert.ToBoolean(random.Next(0, 2));
+                MessageBox.Show("It is " + (playerTurn ? "X" : "O") + "'s turn.");
+            }
+            else
+            {
+                playerTurn = !playerTurn;
+            }
         }
 
         //Method that loads the colors for the window

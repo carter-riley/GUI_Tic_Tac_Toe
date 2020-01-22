@@ -171,7 +171,8 @@ namespace Tic_Tac_Toe
                             return false;
                         }
                         break;
-                    case "0 1":
+                    case "1 0":
+                    //case "0 1":
                         if (location.row >= 3 && location.row <= 5 && location.col >= 0 && location.col <= 2)
                         {
                             return true;
@@ -181,7 +182,8 @@ namespace Tic_Tac_Toe
                             return false;
                         }
                         break;
-                    case "0 2":
+                    case "2 0":
+                    // case "0 2":
                         if (location.row >= 6 && location.row <= 8 && location.col >= 0 && location.col <= 2)
                         {
                             return true;
@@ -191,7 +193,8 @@ namespace Tic_Tac_Toe
                             return false;
                         }
                         break;
-                    case "1 0":
+                    case "0 1":
+                    //case "1 0":
                         if (location.row >= 0 && location.row <= 2 && location.col >= 3 && location.col <= 5)
                         {
                             return true;
@@ -211,7 +214,8 @@ namespace Tic_Tac_Toe
                             return false;
                         }
                         break;
-                    case "1 2":
+                    case "2 1":
+                    // case "1 2":
                         if (location.row >= 6 && location.row <= 8 && location.col >= 3 && location.col <= 5)
                         {
                             return true;
@@ -221,7 +225,8 @@ namespace Tic_Tac_Toe
                             return false;
                         }
                         break;
-                    case "2 0":
+                    case "0 2":
+                    // case "2 0":
                         if (location.row >= 0 && location.row <= 2 && location.col >= 6 && location.col <= 8)
                         {
                             return true;
@@ -231,7 +236,8 @@ namespace Tic_Tac_Toe
                             return false;
                         }
                         break;
-                    case "2 1":
+                    case "1 2":
+                    // case "2 1":
                         if (location.row >= 3 && location.row <= 5 && location.col >= 6 && location.col <= 8)
                         {
                             return true;
@@ -283,6 +289,21 @@ namespace Tic_Tac_Toe
             }
             else
             {
+                if  ((Grid[0,0].symbol == playerSymbol & Grid[1,0].symbol == playerSymbol & Grid[2,0].symbol == playerSymbol) ||
+                    (Grid[0,1].symbol == playerSymbol  & Grid[1,1].symbol == playerSymbol  & Grid[2,1].symbol == playerSymbol) ||
+                    (Grid[0,2].symbol == playerSymbol  & Grid[1,2].symbol == playerSymbol  & Grid[2,2].symbol == playerSymbol) ||
+                    (Grid[0,0].symbol == playerSymbol  & Grid[0,1].symbol == playerSymbol  & Grid[0,2].symbol == playerSymbol) ||
+                    (Grid[1,0].symbol == playerSymbol  & Grid[1,1].symbol == playerSymbol  & Grid[1,2].symbol == playerSymbol) ||
+                    (Grid[2,0].symbol == playerSymbol & Grid[2,1].symbol == playerSymbol  & Grid[2,2].symbol == playerSymbol) ||
+                    (Grid[0,0].symbol == playerSymbol & Grid[1,1].symbol == playerSymbol & Grid[2,2].symbol == playerSymbol) ||
+                    (Grid[0,2].symbol == playerSymbol & Grid[1,1].symbol == playerSymbol & Grid[2,0].symbol == playerSymbol))
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+                /*
                 // Horizontal
                 for (int i = 0; i < N; i++)
                 {
@@ -371,7 +392,7 @@ namespace Tic_Tac_Toe
                 }
 
                 return false;
-            }
+            */}
         }
 
         /*

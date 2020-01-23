@@ -16,6 +16,8 @@
         </Grid.ColumnDefinitions>
         <Border BorderBrush="Black" BorderThickness="4" Grid.Column="1" HorizontalAlignment="Left" Height="300" Margin="38,31,0,0" VerticalAlignment="Top" Width="330">
             <Image Source="download.jpg" Stretch="Fill"/>
+            <!--Source For Image
+            http://crystalclearfinances.com/radio/tic-tac-toe/-->
         </Border>
         <Label Name="title"  Content="Tic-Tac-Toe Simulator" FontWeight="Bold" FontSize="32" HorizontalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" Height="62" Margin="25,347,0,0" VerticalAlignment="Top" Width="343"/>
 

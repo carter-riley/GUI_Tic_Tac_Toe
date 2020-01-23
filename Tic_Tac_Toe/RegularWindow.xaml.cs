@@ -182,7 +182,7 @@ namespace Tic_Tac_Toe
                             }
                             else
                             {
-                                MessageBox.Show(playerTurn ? "X" : "O" + " has one more chance to win or else they lose.");
+                                MessageBox.Show((playerTurn ? "O" : "X") + " has one more chance to win or else they lose.");
                                 playerTurn = !playerTurn;
                                 oneMoreTurn = true;
                                 return;
@@ -217,6 +217,7 @@ namespace Tic_Tac_Toe
                     MessageBox.Show("Cats game, nobody won!");
                     gameOver = true;
                     playAgainMessage();
+                    return;
                 }
             }
             else

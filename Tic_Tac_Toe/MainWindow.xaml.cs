@@ -242,7 +242,7 @@ namespace Tic_Tac_Toe
             MessageBox.Show(boardFromFile.ToString());
 
             if (boardFromFile.N == 3) {
-                RegularWindow regularWindow = new RegularWindow(String.Empty)/*boardFromFile.gameMode*/);
+                RegularWindow regularWindow = new RegularWindow(String.Empty)/*boardFromFile.gameMode*/;
 
                 //Closes initial window
                 this.Close();
@@ -256,9 +256,9 @@ namespace Tic_Tac_Toe
                 regularWindow.Show();
             } else
             {
-                Application.Current.Properties["BoardSize"] = boardSize; // Max board size of 10
+                Application.Current.Properties["BoardSize"] = boardFromFile.N; // Max board size of 10
 
-                CustomWindow customWindow = new CustomWindow(gameMode);
+                CustomWindow customWindow = new CustomWindow(String.Empty);
 
                 //These startup variables should be colors
                 //Assigns these variables so the next window that is open can use them to have the same colors

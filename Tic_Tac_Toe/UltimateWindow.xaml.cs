@@ -139,6 +139,7 @@ namespace Tic_Tac_Toe
                 {
                     MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
                     gameOver = true;
+                    playAgainMessage();
                 }
             }
             else
@@ -185,9 +186,52 @@ namespace Tic_Tac_Toe
         //Used for the Rules button
         private void btn_RuleClick(object sender, RoutedEventArgs e)
         {
+            RuleWindow ruleWindow;
+
             //Pops up a message box that displays the rules of the chosen game
             //*********Replace with actual rules
-            MessageBox.Show("The object of Ultimate Tic-tac-toe is to get three in a row. You play on a three by three game board of three by three game boards. The first player is known as X and the second is O. Players alternate placing Xs and Os on the each game board determined by where the last player played. Play is ended when either opponent has three in a row or all nine squares are filled. X always goes first, and in the event that no one has three in a row, the stalemate is called a cat game");
+            ruleWindow = new RuleWindow("The object of Ultimate Tic-tac-toe is to get three in a row. You play on a three by three game board of three by three game boards. The first player is known as X and the second is O. Players alternate placing Xs and Os on the each game board determined by where the last player played. Play is ended when either opponent has three in a row or all nine squares are filled. X always goes first, and in the event that no one has three in a row, the stalemate is called a cat game");
+            ruleWindow.Show();
+
         }
+
+
+        //Method that creates a message box with buttons
+        //Used to ask the user if they want to play again or not
+        private void playAgainMessage()
+        {
+            //Creates a message box with buttons
+            MessageBoxResult playAgainBoxResult =
+                MessageBox.Show("Do you want to play again?", "Play Again", MessageBoxButton.YesNo);
+
+            //If user says yes then it clears the board
+            if (playAgainBoxResult == MessageBoxResult.Yes)
+            {
+                foreach (Button btn in this.UltimateGrid.Children.OfType<Button>())
+                {
+                    btn.Content = "";
+                }
+
+                gameOver = false;
+                gameBoard = null;
+                gameBoard = new TicTacToeBoard(3, 0);
+                playerTurn = true;
+                moveCounter = 0;
+            }
+            else if (playAgainBoxResult == MessageBoxResult.No) //If user says no then it closes window and opens main window
+            {
+                MainWindow mainWindow = new MainWindow();
+
+                mainWindow.Show();
+
+                //Sets background and foreground color
+                mainWindow.mainGrid.Background = (Brush)Application.Current.Properties["Background"];
+                mainWindow.title.Foreground = (Brush)Application.Current.Properties["FontColor"];
+                mainWindow.boardLabel.Foreground = (Brush)Application.Current.Properties["FontColor"];
+
+                this.Close();
+            }
+        }
+
     }
 }

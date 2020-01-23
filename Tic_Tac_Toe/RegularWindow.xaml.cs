@@ -139,6 +139,8 @@ namespace Tic_Tac_Toe
                                                
                         MessageBox.Show((playerTurn ? "X" : "O") + " Lost!");
                         gameOver = true;
+                        playAgainMessage();
+                        return;
                     }
                 } else if (mode == "Nokato Tic-tac-toe") {
 
@@ -146,6 +148,8 @@ namespace Tic_Tac_Toe
                     {
                         MessageBox.Show((playerTurn ? "Player 1" : "Player 2") + " Lost!");
                         gameOver = true;
+                        playAgainMessage();
+                        return;
                     }
                 }
                 else
@@ -346,6 +350,7 @@ namespace Tic_Tac_Toe
                 gameBoard = new TicTacToeBoard(3, 0);
                 playerTurn = true;
                 moveCounter = 0;
+                oneMoreTurn = false;
             }
             else if (playAgainBoxResult == MessageBoxResult.No) //If user says no then it closes window and opens main window
             {
@@ -354,9 +359,9 @@ namespace Tic_Tac_Toe
                 mainWindow.Show();
 
                 //Sets background and foreground color
-                mainWindow.mainGrid.Background = btn1.Background;
-                mainWindow.title.Foreground = btn1.Foreground;
-                mainWindow.boardLabel.Foreground = btn1.Foreground;
+                mainWindow.mainGrid.Background = (Brush)Application.Current.Properties["Background"];
+                mainWindow.title.Foreground = (Brush)Application.Current.Properties["FontColor"];
+                mainWindow.boardLabel.Foreground = (Brush)Application.Current.Properties["FontColor"];
 
                 this.Close();
             }

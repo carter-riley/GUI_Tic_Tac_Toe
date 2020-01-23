@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -77,9 +79,12 @@ namespace Tic_Tac_Toe
             }
             else if (value == "Save")
             {
-                //TODO
-                //Implement save method using a text file
-                //
+                BinaryFormatter binFormat = new BinaryFormatter();
+                using (Stream fStream =
+                    new FileStream(DateTime.Now.ToFileTime() + ".dat", FileMode.Create, FileAccess.Write, FileShare.None))
+                {
+                    binFormat.Serialize(fStream, gameBoard);
+                }
             }
             else if (value == "Quit")
             {

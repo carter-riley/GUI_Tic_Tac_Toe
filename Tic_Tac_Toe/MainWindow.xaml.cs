@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Win32;
 
 namespace Tic_Tac_Toe
@@ -217,26 +218,31 @@ namespace Tic_Tac_Toe
             string filePath = string.Empty;
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog.Filter = "dat files (*.dat)|*.dat|All files (*.*)|*.*";
             openFileDialog.RestoreDirectory = true;
 
             openFileDialog.ShowDialog();
 
             filePath = openFileDialog.FileName;
-            Stream fileStream = openFileDialog.OpenFile();
 
-            using (StreamReader reader = new StreamReader(fileStream))
+            if (filePath.Equals(String.Empty))
             {
-                fileContent = reader.ReadToEnd();
+                return;
             }
 
-            string gameMode = fileContent.Substring(0, fileContent.IndexOf('\n'));
-            string gameBoard = fileContent.Substring(fileContent.IndexOf('\n') + 1);
+            Stream fileStream = openFileDialog.OpenFile();
+            TicTacToeBoard boardFromFile;
 
-            int boardSize = Int32.Parse(gameBoard.Substring(gameBoard.IndexOf('\n') - 1, 1)) + 1;
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            using (Stream fStream = File.OpenRead(filePath))
+            {
+                boardFromFile = (TicTacToeBoard)binaryFormatter.Deserialize(fStream);
+            }
 
-            if (boardSize == 3) {
-                RegularWindow regularWindow = new RegularWindow(gameMode);
+            MessageBox.Show(boardFromFile.ToString());
+
+            if (boardFromFile.N == 3) {
+                RegularWindow regularWindow = new RegularWindow(String.Empty)/*boardFromFile.gameMode*/);
 
                 //Closes initial window
                 this.Close();

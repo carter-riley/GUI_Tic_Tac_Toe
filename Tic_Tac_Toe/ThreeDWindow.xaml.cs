@@ -29,7 +29,8 @@ namespace Tic_Tac_Toe
         {
             mode = gameMode;
             InitializeComponent();
-            gameBoard = new TicTacToeBoard(3, 8);
+            gameBoard = new TicTacToeBoard(true);
+            gameBoard.gameMode = 8;
             // MessageBox.Show("Player X is going first.");
         }
 
@@ -101,14 +102,18 @@ namespace Tic_Tac_Toe
             //This method is for the game board
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if(gameOver) {
+
+
+            if (gameOver)
+            {
                 MessageBox.Show("The game is over.");
+                //playAgainMessage();
                 return;
             }
             //Creates a new button
             Button btn = sender as Button;
 
-            Coordinates location = new Coordinates(Grid.GetRow(btn), Grid.GetColumn(btn), Int32.Parse(btn.Name.Substring(2,1)));
+            Coordinates location = new Coordinates(Grid.GetRow(btn), Grid.GetColumn(btn), Int32.Parse(btn.Name.Substring(2, 1)));
             // if (btn.Content != null)
 
 
@@ -116,13 +121,36 @@ namespace Tic_Tac_Toe
             {
                 moveCounter++;
                 // MessageBox.Show("Move counter is: " + moveCounter);
+
                 gameBoard.makeMove(location, playerTurn ? 'X' : 'O', mode);
                 btn.Content = playerTurn ? "X" : "O";
 
-                if (gameBoard.isWinner(playerTurn ? 'X' : 'O', mode))
+
+                    if (gameBoard.isWinner(playerTurn ? 'X' : 'O', mode))
+                    {
+
+                        if (moveCounter == 27)
+                        {
+                            MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
+                            gameOver = true;
+                            //playAgainMessage();
+                            return;
+                        }
+                        else
+                        {
+                            MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
+                            gameOver = true;
+                            //playAgainMessage();
+                            return;
+                        }
+                        
+                    }
+                
+                if (3 * 3 * 3 == moveCounter)
                 {
-                    MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
+                    MessageBox.Show("Cats game, nobody won!");
                     gameOver = true;
+                    /*playAgainMessage();*/
                 }
             }
             else
@@ -137,14 +165,16 @@ namespace Tic_Tac_Toe
             //Prints an X or O to the button that is pressed
 
 
-        
+
             //TODO
             //Use this to get exact coordinates of users play and return that for logistics
             //This section of code can be used to obtain the coordinates of the where the user has placed an X or O
 
 
             //Flips this bool so that it switches between X and O
-            playerTurn = !playerTurn;
+
+              playerTurn = !playerTurn;
+            
         }
 
         //Method that loads the colors for the window

@@ -79,9 +79,7 @@ namespace Tic_Tac_Toe
             }
             else if (value == "Save")
             {
-                //TODO
-                //Implement save method using a text file
-                //
+                System.IO.File.WriteAllText(@".\" + DateTime.Now.ToFileTime() + ".txt", mode + '\n' + gameBoard.ToString());
             }
             else if (value == "Quit")
             {

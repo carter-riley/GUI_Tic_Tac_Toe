@@ -50,6 +50,25 @@ namespace Tic_Tac_Toe
             this.gameMode = 0;
         }
 
+        public TicTacToeBoard(bool threeD)
+        {
+            this.gameMode = 8;
+            N = 3;
+
+            ThreeDGrid = new Cell[3, 3, 3];
+            for (int i = 0; i < N; i++)
+            {
+                for (int j = 0; j < N; j++)
+                {
+                    for (int k = 0; k < N; k++)
+                    {
+                        ThreeDGrid[i, j, k] = new Cell();
+                    }
+                }
+            }
+            this.ThreeDGrid = ThreeDGrid;
+        }
+
         public TicTacToeBoard(int size, int mode)
         {
             this.gameMode = mode;
@@ -279,210 +298,261 @@ namespace Tic_Tac_Toe
 
         public bool isWinner(char playerSymbol, string mode)
         {
-            int counterHorizontal = 0;
-            int counterVertical = 0;
-            int counterDiagonal = 0;
-
             if (gameMode == 8)
             {
+                // Depth
+                for(int i = 0; i < N; i++)
+                {
+                    int count1 = 0;
+                    for(int j = 0; j < N; j++)
+                    {
+                        int count2 = 0;
+                        for(int k = 0; k < N; k++)
+                        {
+                            if(ThreeDGrid[i,j,k].symbol == playerSymbol)
+                            {
+                                count2++;
+                            }
+                        }
+                        if(count2 == N)
+                        {
+                            return true;
+                        }
+                    }
+                }
+                // Width
+                for (int i = 0; i < N; i++)
+                {
+                    int count1 = 0;
+                    for (int j = 0; j < N; j++)
+                    {
+                        int count2 = 0;
+                        for (int k = 0; k < N; k++)
+                        {
+                            if (ThreeDGrid[j, k, i].symbol == playerSymbol)
+                            {
+                                count2++;
+                            }
+                        }
+                        if (count2 == N)
+                        {
+                            return true;
+                        }
+                    }
+                }
+                // Height
+                for (int i = 0; i < N; i++)
+                {
+                    int count1 = 0;
+                    for (int j = 0; j < N; j++)
+                    {
+                        int count2 = 0;
+                        for (int k = 0; k < N; k++)
+                        {
+                            if (ThreeDGrid[k, i, j].symbol == playerSymbol)
+                            {
+                                count2++;
+                            }
+                        }
+                        if (count2 == N)
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+                for (int j = 0; j< N; j++) {
+                    int counter = 0;
+                    for (int i = 0; i < N; i++)
+                    {
+                        if (ThreeDGrid[i, i, j].symbol == playerSymbol)
+                        {
+                            counter++;
+                        }
+                    }
+                    if (counter == N)
+                    {
+                        return true;
+                    } else
+                    {
+                        counter = 0;
+                    }
+                }
+                for (int j = 0; j < N; j++)
+                {
+                    int counter = 0;
+                    for (int i = 0; i < N; i++)
+                    {
+                        if (ThreeDGrid[i, (N - 1) - i, j].symbol == playerSymbol)
+                        {
+                            counter++;
+                        }
+                    }
+                    if (counter == N)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                for (int j = 0; j < N; j++)
+                {
+                    int counter = 0;
+                    for (int i = 0; i < N; i++)
+                    {
+                        if (ThreeDGrid[j, i, i].symbol == playerSymbol)
+                        {
+                            counter++;
+                        }
+                    }
+                    if (counter == N)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        counter = 0;
+                    }
+                }
+                for (int j = 0; j < N; j++)
+                {
+                    int counter = 0;
+                    for (int i = 0; i < N; i++)
+                    {
+                        if (ThreeDGrid[j, i, (N - 1) - i].symbol == playerSymbol)
+                        {
+                            counter++;
+                        }
+                    }
+                    if (counter == N)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                for (int j = 0; j < N; j++)
+                {
+                    int counter = 0;
+                    for (int i = 0; i < N; i++)
+                    {
+                        if (ThreeDGrid[i, j, i].symbol == playerSymbol)
+                        {
+                            counter++;
+                        }
+                    }
+                    if (counter == N)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        counter = 0;
+                    }
+                }
+                for (int j = 0; j < N; j++)
+                {
+                    int counter = 0;
+                    for (int i = 0; i < N; i++)
+                    {
+                        if (ThreeDGrid[(N - 1) - i, j, i].symbol == playerSymbol)
+                        {
+                            counter++;
+                        }
+                    }
+                    if (counter == N)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                if ((ThreeDGrid[0, 0, 0].symbol == playerSymbol && ThreeDGrid[1, 1, 1].symbol == playerSymbol && ThreeDGrid[2, 2, 2].symbol == playerSymbol) ||
+                   (ThreeDGrid[2, 0, 0].symbol == playerSymbol && ThreeDGrid[1, 1, 1].symbol == playerSymbol && ThreeDGrid[0, 2, 0].symbol == playerSymbol) ||
+                   (ThreeDGrid[0, 2, 0].symbol == playerSymbol && ThreeDGrid[1, 1, 1].symbol == playerSymbol && ThreeDGrid[2, 0, 0].symbol == playerSymbol) ||
+                   (ThreeDGrid[2, 2, 0].symbol == playerSymbol && ThreeDGrid[1, 1, 1].symbol == playerSymbol && ThreeDGrid[0, 0, 2].symbol == playerSymbol))
+                {
+                    return true;
+                }
+
                 return false;
             }
             else
             {
-                if  ((Grid[0,0].symbol == playerSymbol & Grid[1,0].symbol == playerSymbol & Grid[2,0].symbol == playerSymbol) ||
-                    (Grid[0,1].symbol == playerSymbol  & Grid[1,1].symbol == playerSymbol  & Grid[2,1].symbol == playerSymbol) ||
-                    (Grid[0,2].symbol == playerSymbol  & Grid[1,2].symbol == playerSymbol  & Grid[2,2].symbol == playerSymbol) ||
-                    (Grid[0,0].symbol == playerSymbol  & Grid[0,1].symbol == playerSymbol  & Grid[0,2].symbol == playerSymbol) ||
-                    (Grid[1,0].symbol == playerSymbol  & Grid[1,1].symbol == playerSymbol  & Grid[1,2].symbol == playerSymbol) ||
-                    (Grid[2,0].symbol == playerSymbol & Grid[2,1].symbol == playerSymbol  & Grid[2,2].symbol == playerSymbol) ||
-                    (Grid[0,0].symbol == playerSymbol & Grid[1,1].symbol == playerSymbol & Grid[2,2].symbol == playerSymbol) ||
-                    (Grid[0,2].symbol == playerSymbol & Grid[1,1].symbol == playerSymbol & Grid[2,0].symbol == playerSymbol))
+                for(int i = 0; i < N; i++)
+                {
+                    int vertcounter = 0;
+                    for(int j = 0; j < N; j++)
+                    {
+                        if (Grid[i,j].symbol == playerSymbol)
+                        {
+                            vertcounter++;
+                        }
+                    }
+                    if(vertcounter == N)
+                    {
+                        return true;
+                    }
+                }
+
+                for (int i = 0; i < N; i++)
+                {
+                    int horizCounter = 0;
+                    for (int j = 0; j < N; j++)
+                    {
+                        if (Grid[j, i].symbol == playerSymbol)
+                        {
+                            horizCounter++;
+                        }
+                    }
+                    if (horizCounter == N)
+                    {
+                        return true;
+                    }
+                }
+
+                int counter = 0;
+                for (int i = 0; i < N; i++)
+                {
+                    if (Grid[i, i].symbol == playerSymbol)
+                    {
+                        counter++;
+                    }
+                }
+                if (counter == N)
                 {
                     return true;
                 } else
                 {
-                    return false;
+                    counter = 0;
                 }
-                /*
-                // Horizontal
+
                 for (int i = 0; i < N; i++)
                 {
-                    for (int j = 0; j < N; j++)
+                    if (Grid[i, (N- 1) - i].symbol == playerSymbol)
                     {
-                        Cell currCell = Grid[i, j];
-                        char piece = currCell.symbol;
-                        if (piece == playerSymbol)
-                        {
-                            counterHorizontal++;
-                        }
-                    }
-
-                    if (counterHorizontal == N)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        counterHorizontal = 0;
+                        counter++;
                     }
                 }
-
-                // Vertical
-                for (int i = 0; i < N; i++)
-                {
-                    for (int j = 0; j < N; j++)
-                    {
-                        Cell currCell = Grid[i, j];
-                        char piece = currCell.symbol;
-                        if (piece == playerSymbol)
-                        {
-                            counterVertical++;
-                        }
-                    }
-
-                    if (counterVertical == N)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        counterVertical = 0;
-                    }
-                }
-
-                // Diagonal
-                // Top Left to Bottom Right
-                for (int j = 0; j < N; j++)
-                {
-                    Cell currCell = Grid[j, j];
-                    char piece = currCell.symbol;
-                    if (piece == playerSymbol)
-                    {
-                        counterDiagonal++;
-                    }
-                }
-
-                if (counterDiagonal == N)
+                if (counter == N)
                 {
                     return true;
                 }
                 else
                 {
-                    counterDiagonal = 0;
+                    return false;
                 }
 
-                // Bottom Left to Top Right
-                for (int i = 0; i < N; i++)
-                {
-                    for (int j = N - 1; j > 0; j--)
-                    {
-                        Cell currCell = Grid[i, j];
-                        char piece = currCell.symbol;
-                        if (piece == playerSymbol)
-                        {
-                            counterDiagonal++;
-                        }
-
-                    }
-                }
-
-                if (counterDiagonal == N)
-                {
-                    return true;
-                }
-
-                return false;
-            */}
-        }
-
-        /*
-        public void normalTicTacToeGameLoop()
-        {
-            while (!isWinner())
-            {
-                normalTicTacToeTurn();
-                if (isWinner) { }
-                normalTicTacToeTurn();
+                
             }
-        }
-
-        public void normalTicTacToeTurn()
-        {
 
         }
 
-        public void misereTicTacToeGameLoop()
-        {
-
-        }
-
-        public void MisereTicTacToeTurn()
-        {
-
-        }
-        public void nokatoTicTacToeGameLoop()
-        {
-
-        }
-
-        public void nokatoTicTacToeTurn()
-        {
-
-        }
-        public void wildTicTacToeGameLoop()
-        {
-
-        }
-
-        public void wildTicTacToeTurn()
-        {
-
-        }
-        public void devilsTicTacToeGameLoop()
-        {
-
-        }
-
-        public void devilsTicTacToeTurn()
-        {
-
-        }
-        public void revengeTicTacToeGameLoop()
-        {
-
-        }
-
-        public void revengeTicTacToeTurn()
-        {
-
-        }
-        public void randomTicTacToeGameLoop()
-        {
-
-        }
-
-        public void randomTicTacToeTurn()
-        {
-
-        }
-        public void ultimateTicTacToeGameLoop()
-        {
-
-        }
-
-        public void ultimateTicTacToeTurn()
-        {
-
-        }
-        public void threeDTicTacToeGameLoop()
-        {
-
-        }
-
-        public void threeDTicTacToeTurn()
-        {
-
-        }
-        */
     }
 }

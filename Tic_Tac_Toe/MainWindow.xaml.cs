@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
+using Microsoft.Win32;
 
 namespace Tic_Tac_Toe
 {
@@ -138,20 +140,56 @@ namespace Tic_Tac_Toe
             }
             else
             {
-                Application.Current.Properties["BoardSize"] = int.Parse(mainText.Text);
+                if (int.Parse(mainText.Text) <= 3)
+                {
+                    if (value == "Play")
+                    {
+                        //We don't want the program to do anything if play is selected so it returns here
+                        return;
+                    }
+                    else if (value == "Normal Tic-tac-toe" ||
+                             value == "Misere Tic-tac-toe (Avoidance Tic-tac-toe)" ||
+                             value == "Misere Tic-tac-toe (Avoidance Tic-tac-toe)" ||
+                             value == "Nokato Tic-tac-toe" ||
+                             value == "Wild Tic-tac-toe (Your Choice Tic-tac-toe)" ||
+                             value == "Devil's Tic-tac-toe" ||
+                             value == "Revenge Tic-tac-toe" ||
+                             value == "Random Tic-tac-toe")
+                    {
+                        //Creates the new Window
+                        RegularWindow regularWindow = new RegularWindow(value);
 
-                CustomWindow customWindow = new CustomWindow();
+                        //Closes initial window
+                        this.Close();
 
-               //These startup variables should be colors
-                //Assigns these variables so the next window that is open can use them to have the same colors
-                Application.Current.Properties["Background"] = mainGrid.Background;
-                Application.Current.Properties["FontColor"] = title.Foreground;
+                        //These startup variables should be colors
+                        //Assigns these variables so the next window that is open can use them to have the same colors
+                        Application.Current.Properties["Background"] = mainGrid.Background;
+                        Application.Current.Properties["FontColor"] = title.Foreground;
 
-                //Closes first window opens another
-                this.Close();
+                        //Show next window
+                        regularWindow.Show();
+                    }
+                }
+                else
+                {
+                    int size = int.Parse(mainText.Text);
+                    Application.Current.Properties["BoardSize"] = size <= 10 ? size : 10; // Max board size of 10
 
-                customWindow.createWindow(customWindow);
+                    CustomWindow customWindow = new CustomWindow(value);
+
+                    //These startup variables should be colors
+                    //Assigns these variables so the next window that is open can use them to have the same colors
+                    Application.Current.Properties["Background"] = mainGrid.Background;
+                    Application.Current.Properties["FontColor"] = title.Foreground;
+
+                    //Closes first window opens another
+                    this.Close();
+
+                    customWindow.createWindow(customWindow);
+                }
             }
+        
         }
 
         //Method for the event of a button click
@@ -170,6 +208,63 @@ namespace Tic_Tac_Toe
 
             //Closes initial window
             this.Close();
+
+        }
+
+        private void btn_LoadClick(object sender, RoutedEventArgs e)
+        {
+            string fileContent = string.Empty;
+            string filePath = string.Empty;
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog.RestoreDirectory = true;
+
+            openFileDialog.ShowDialog();
+
+            filePath = openFileDialog.FileName;
+            Stream fileStream = openFileDialog.OpenFile();
+
+            using (StreamReader reader = new StreamReader(fileStream))
+            {
+                fileContent = reader.ReadToEnd();
+            }
+
+            string gameMode = fileContent.Substring(0, fileContent.IndexOf('\n'));
+            string gameBoard = fileContent.Substring(fileContent.IndexOf('\n') + 1);
+
+            int boardSize = Int32.Parse(gameBoard.Substring(gameBoard.IndexOf('\n') - 1, 1)) + 1;
+
+            if (boardSize == 3) {
+                RegularWindow regularWindow = new RegularWindow(gameMode);
+
+                //Closes initial window
+                this.Close();
+
+                //These startup variables should be colors
+                //Assigns these variables so the next window that is open can use them to have the same colors
+                Application.Current.Properties["Background"] = mainGrid.Background;
+                Application.Current.Properties["FontColor"] = title.Foreground;
+
+                //Show next window
+                regularWindow.Show();
+            } else
+            {
+                Application.Current.Properties["BoardSize"] = boardSize; // Max board size of 10
+
+                CustomWindow customWindow = new CustomWindow(gameMode);
+
+                //These startup variables should be colors
+                //Assigns these variables so the next window that is open can use them to have the same colors
+                Application.Current.Properties["Background"] = mainGrid.Background;
+                Application.Current.Properties["FontColor"] = title.Foreground;
+
+                //Closes first window opens another
+                this.Close();
+
+                customWindow.createWindow(customWindow);
+            }
+
 
         }
     }

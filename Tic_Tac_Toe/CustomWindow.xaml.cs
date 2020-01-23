@@ -19,13 +19,23 @@ namespace Tic_Tac_Toe
     /// </summary>
     public partial class CustomWindow : Window
     {
-        public CustomWindow()
+
+        private bool playerTurn = true;
+        private bool gameOver = false;
+        private TicTacToeBoard gameBoard;
+        private int moveCounter = 0;
+        private string mode;
+        private bool oneMoreTurn = false;
+
+        public CustomWindow(string gameMode)
         {
+            mode = gameMode;
             InitializeComponent();
+            gameBoard = new TicTacToeBoard((int)Application.Current.Properties["BoardSize"], 0);
         }
 
         private List<Button> board = new List<Button>();
-        private bool playerTurn = false;
+        //private bool playerTurn = false;
 
 
         public void createWindow(CustomWindow w)
@@ -149,9 +159,7 @@ namespace Tic_Tac_Toe
             }
             else if (value == "Save")
             {
-                //TODO
-                //Implement save method using a text file
-                //
+                System.IO.File.WriteAllText(@".\" + DateTime.Now.ToFileTime() + ".txt", mode + '\n' + gameBoard.ToString());
             }
             else if (value == "Quit")
             {
@@ -183,26 +191,146 @@ namespace Tic_Tac_Toe
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (gameOver)
+            {
+                MessageBox.Show("The game is over.");
+                playAgainMessage();
+                return;
+            }
             //Creates a new button
             Button btn = sender as Button;
 
-            //If btn already has an X or O in it then it will just return
-            if (btn.Content != null)
+            Coordinates location = new Coordinates(Grid.GetRow(btn), Grid.GetColumn(btn));
+            // if (btn.Content != null)
+
+
+            if (gameBoard.isValidMove(location, mode))
+            {
+                moveCounter++;
+                // MessageBox.Show("Move counter is: " + moveCounter);
+                if (mode == "Nokato Tic-tac-toe")
+                {
+                    gameBoard.makeMove(location, 'X', mode);
+                    btn.Content = "X";
+                }
+                else if (mode == "Wild Tic-tac-toe (Your Choice Tic-tac-toe)" || mode == "Devil's Tic-tac-toe") //This else-if statement is used for player choice variants of tic-tac-toe
+                {
+                    btn.Content = playerChoiceMessage();
+                }
+                else
+                {
+                    gameBoard.makeMove(location, playerTurn ? 'X' : 'O', mode);
+                    btn.Content = playerTurn ? "X" : "O";
+                }
+                if (mode == "Misere Tic-tac-toe (Avoidance Tic-tac-toe)")
+                {
+                    if (gameBoard.isWinner(playerTurn ? 'X' : 'O', mode))
+                    {
+
+                        MessageBox.Show((playerTurn ? "X" : "O") + " Lost!");
+                        gameOver = true;
+                    }
+                }
+                else if (mode == "Nokato Tic-tac-toe")
+                {
+
+                    if (gameBoard.isWinner('X', mode))
+                    {
+                        MessageBox.Show((playerTurn ? "Player 1" : "Player 2") + " Lost!");
+                        gameOver = true;
+                    }
+                }
+                else
+                {
+                    if (gameBoard.isWinner(playerTurn ? 'X' : 'O', mode))
+                    {
+                        if (mode == "Revenge Tic-tac-toe")
+                        {
+                            if (oneMoreTurn)
+                            {
+                                MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
+                                gameOver = true;
+                                playAgainMessage();
+                                return;
+                            }
+                            if (moveCounter == 9)
+                            {
+                                MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
+                                gameOver = true;
+                                playAgainMessage();
+                                return;
+                            }
+                            else
+                            {
+                                MessageBox.Show(playerTurn ? "X" : "O" + " has one more chance to win or else they lose.");
+                                playerTurn = !playerTurn;
+                                oneMoreTurn = true;
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            if (moveCounter == (int)Application.Current.Properties["BoardSize"] * (int)Application.Current.Properties["BoardSize"])
+                            {
+                                MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
+                                gameOver = true;
+                                playAgainMessage();
+                                return;
+                            }
+                            else
+                            {
+                                MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
+                                gameOver = true;
+                                playAgainMessage();
+                                return;
+                            }
+                        }
+                    }
+                    else if (oneMoreTurn)
+                    {
+                        MessageBox.Show((!playerTurn ? "X" : "O") + " Won!");
+                        gameOver = true;
+                        playAgainMessage();
+                        return;
+                    }
+                }
+                if ((int)Application.Current.Properties["BoardSize"] * (int)Application.Current.Properties["BoardSize"] == moveCounter)
+                {
+                    MessageBox.Show("Cats game, nobody won!");
+                    gameOver = true;
+                    playAgainMessage();
+                }
+            }
+            else
+            {
+                MessageBox.Show("That is not a valid move!");
                 return;
+            }
+            //MessageBox.Show(location.ToString());
+
+            //If btn already has an X or O in it then it will just return
 
             //Prints an X or O to the button that is pressed
-            btn.Content = playerTurn ? "X" : "O";
+
 
 
             //TODO
             //Use this to get exact coordinates of users play and return that for logistics
             //This section of code can be used to obtain the coordinates of the where the user has placed an X or O
-            /*var col = Grid.GetColumn(btn);
-            var row = Grid.GetRow(btn);*/
 
 
             //Flips this bool so that it switches between X and O
-            playerTurn = !playerTurn;
+
+            if (mode == "Random Tic-tac-toe" && !gameOver)
+            {
+                Random random = new Random();
+                playerTurn = Convert.ToBoolean(random.Next(0, 2));
+                MessageBox.Show("It is " + (playerTurn ? "X" : "O") + "'s turn.");
+            }
+            else
+            {
+                playerTurn = !playerTurn;
+            }
         }
 
         //Method that handles the event of a button click 
@@ -229,6 +357,57 @@ namespace Tic_Tac_Toe
             //Closes this window
             this.Close();
 
+        }
+
+        private string playerChoiceMessage()
+        {
+            //Creates a message box with buttons
+            MessageBoxResult playAgainBoxResult = MessageBox.Show("Select |Yes| for X and |No| for O", "X or O", MessageBoxButton.YesNo);
+
+
+            if (playAgainBoxResult == MessageBoxResult.Yes)
+            {
+                return "X";
+            }
+
+            return "O";
+        }
+
+        //Method that creates a message box with buttons
+        //Used to ask the user if they want to play again or not
+        private void playAgainMessage()
+        {
+            //Creates a message box with buttons
+            MessageBoxResult playAgainBoxResult =
+                MessageBox.Show("Do you want to play again?", "Play Again", MessageBoxButton.YesNo);
+
+            //If user says yes then it clears the board
+            if (playAgainBoxResult == MessageBoxResult.Yes)
+            {
+                //foreach (Button btn in this.Grid.Children.OfType<Button>())
+                //{
+                //    btn.Content = "";
+                //}
+
+                gameOver = false;
+                gameBoard = null;
+                gameBoard = new TicTacToeBoard((int)Application.Current.Properties["BoardSize"], 0);
+                playerTurn = true;
+                moveCounter = 0;
+            }
+            else if (playAgainBoxResult == MessageBoxResult.No) //If user says no then it closes window and opens main window
+            {
+                MainWindow mainWindow = new MainWindow();
+
+                mainWindow.Show();
+
+                //Sets background and foreground color
+                //mainWindow.mainGrid.Background = btn1.Background;
+                //mainWindow.title.Foreground = btn1.Foreground;
+                //mainWindow.boardLabel.Foreground = btn1.Foreground;
+
+                this.Close();
+            }
         }
     }
 }

@@ -25,13 +25,23 @@ namespace Tic_Tac_Toe
         private int moveCounter = 0;
         private string mode;
         private Coordinates lastMove = null;
+        private TicTacToeBoard[,] theBoards;
 
 
         public UltimateWindow(string gameMode)
         {
             mode = gameMode;
             InitializeComponent();
-            gameBoard = new TicTacToeBoard(9, 0);
+            gameBoard = new TicTacToeBoard(3, 0);
+            theBoards[0, 0] = new TicTacToeBoard(3, 0);
+            theBoards[0, 1] = new TicTacToeBoard(3, 0);
+            theBoards[0, 2] = new TicTacToeBoard(3, 0);
+            theBoards[1, 0] = new TicTacToeBoard(3, 0);
+            theBoards[1, 1] = new TicTacToeBoard(3, 0);
+            theBoards[1, 2] = new TicTacToeBoard(3, 0);
+            theBoards[2, 0] = new TicTacToeBoard(3, 0);
+            theBoards[2, 1] = new TicTacToeBoard(3, 0);
+            theBoards[2, 2] = new TicTacToeBoard(3, 0);
             // MessageBox.Show("Player X is going first.");
         }
 

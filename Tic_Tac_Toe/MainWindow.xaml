@@ -32,5 +32,6 @@
         <Button Content="Settings" HorizontalAlignment="Left" Margin="319,372,0,0" VerticalAlignment="Top" Width="67" Click="btn_SettingClick"/>
         <TextBox Name="mainText" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" FontSize="15" BorderThickness="1" Height="38" Margin="142,206,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="29"/>
         <Label Name="boardLabel" Content="Board Size (n x n)" FontWeight="Bold" FontSize="15" HorizontalAlignment="Left" Margin="5,206,0,0" VerticalAlignment="Top" Height="38" Width="137"/>
+        <Button Content="Load Previous Game" HorizontalAlignment="Left" Margin="169,372,0,0" VerticalAlignment="Top" Width="130" Click="btn_LoadClick"/>
     </Grid>
 </Window>

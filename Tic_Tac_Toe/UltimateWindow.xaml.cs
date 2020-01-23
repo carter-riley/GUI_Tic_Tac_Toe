@@ -25,7 +25,7 @@ namespace Tic_Tac_Toe
         private int moveCounter = 0;
         private string mode;
         private Coordinates lastMove = null;
-        private TicTacToeBoard[,] theBoards;
+        private TicTacToeBoard[,] theBoards = new TicTacToeBoard[3, 3];
 
 
         public UltimateWindow(string gameMode)

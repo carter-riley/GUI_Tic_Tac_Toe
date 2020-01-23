@@ -384,10 +384,10 @@ namespace Tic_Tac_Toe
             //If user says yes then it clears the board
             if (playAgainBoxResult == MessageBoxResult.Yes)
             {
-                //foreach (Button btn in this.Grid.Children.OfType<Button>())
-                //{
-                //    btn.Content = "";
-                //}
+                foreach (Button btn in board)
+                {
+                    btn.Content = "";
+                }
 
                 gameOver = false;
                 gameBoard = null;
@@ -402,9 +402,9 @@ namespace Tic_Tac_Toe
                 mainWindow.Show();
 
                 //Sets background and foreground color
-                //mainWindow.mainGrid.Background = btn1.Background;
-                //mainWindow.title.Foreground = btn1.Foreground;
-                //mainWindow.boardLabel.Foreground = btn1.Foreground;
+                mainWindow.mainGrid.Background = (Brush)Application.Current.Properties["Background"]; 
+                mainWindow.title.Foreground = (Brush)Application.Current.Properties["FontColor"];
+                mainWindow.boardLabel.Foreground = (Brush)Application.Current.Properties["FontColor"];
 
                 this.Close();
             }

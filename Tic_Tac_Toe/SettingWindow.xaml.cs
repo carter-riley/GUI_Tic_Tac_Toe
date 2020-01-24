@@ -102,7 +102,7 @@ namespace Tic_Tac_Toe
             MainWindow mainWindow = new MainWindow();
             RegularWindow regularWindow = new RegularWindow(gameMode);
             UltimateWindow ultimateWindow = new UltimateWindow(String.Empty);
-            CustomWindow customWindow = new CustomWindow(String.Empty);
+            CustomWindow customWindow = new CustomWindow(gameMode);
             ThreeDWindow threeDWindow = new ThreeDWindow(String.Empty);
 
             //This conditional is used to open the previous window that was open before the settings window

@@ -1,14 +1,7 @@
-<<<<<<< HEAD
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-=======
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
->>>>>>> 6729cfb108a6b179b4c607d489a1d06b3e41d260
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
@@ -189,16 +182,9 @@ namespace Tic_Tac_Toe
                 return;
             }
             else if (value == "Save")
-<<<<<<< HEAD
             {
                 BinaryFormatter binFormat = new BinaryFormatter();
                 using (Stream fStream = new FileStream(DateTime.Now.ToFileTime() + ".dat", FileMode.Create, FileAccess.Write, FileShare.None))
-=======
-            {
-                BinaryFormatter binFormat = new BinaryFormatter();
-                using (Stream fStream =
-                    new FileStream(DateTime.Now.ToFileTime() + ".dat", FileMode.Create, FileAccess.Write, FileShare.None))
->>>>>>> 6729cfb108a6b179b4c607d489a1d06b3e41d260
                 {
                     binFormat.Serialize(fStream, gameBoard);
                 }
@@ -308,7 +294,7 @@ namespace Tic_Tac_Toe
                             }
                             else
                             {
-                                MessageBox.Show((playerTurn ? "X" : "O") + " has one more chance to win or else they lose.");
+                                MessageBox.Show(playerTurn ? "X" : "O" + " has one more chance to win or else they lose.");
                                 playerTurn = !playerTurn;
                                 oneMoreTurn = true;
                                 return;
@@ -383,39 +369,9 @@ namespace Tic_Tac_Toe
         //Used for the Rules button
         private void btn_RuleClick(object sender, RoutedEventArgs e)
         {
-
-            RuleWindow ruleWindow;
             //Pops up a message box that displays the rules of the chosen game
             //*********Replace with actual rules
-            switch (mode)
-            {
-                case "Normal Tic-tac-toe":
-                    ruleWindow = new RuleWindow("The object of Tic Tac Toe is to get three in a row. You play on a three by three game board. The first player is known as X and the second is O. Players alternate placing Xs and Os on the game board until either opponent has three in a row or all nine squares are filled. X always goes first, and in the event that no one has three in a row, the stalemate is called a cat game");
-                    break;
-                case "Misere Tic-tac-toe (Avoidance Tic-tac-toe)":
-                    ruleWindow = new RuleWindow("The object of Misere Tic-tac-toe (Avoidance Tic-tac-toe) is to avoid getting three in a row. You play on a three by three game board. The first player is known as X and the second is O. Players alternate placing Xs and Os on the game board until either opponent has three in a row or all nine squares are filled. X always goes first, and in the event that no one has three in a row, the stalemate is called a cat game");
-                    break;
-                case "Nokato Tic-tac-toe":
-                    ruleWindow = new RuleWindow("The object of Nokato Tic-tac-toe is to avoid getting three in a row. You play on a three by three game board. Both players are X. Players alternate placing Xs on the game board until one of the players gets three in a row and loses.");
-                    break;
-                case "Wild Tic-tac-toe (Your Choice Tic-tac-toe)":
-                    ruleWindow = new RuleWindow("The object of Wild Tic-tac-toe (Your Choice Tic-tac-toe) is to get three in a row. You play on a three by three game board. Player 1 an player 2 get to choose wether to place an X or an O each turn. Players placing Xs or Os on the game board until either an opponent has three in a row or all nine squares are filled. Player 1 goes first, and in the event that no one has three in a row, the stalemate is called a cat game");
-                    break;
-                case "Devil's Tic-tac-toe":
-                    ruleWindow = new RuleWindow("The object of Devil's Tic-tac-toe is to avoid getting three in a row. You play on a three by three game board. Player 1 an player 2 get to choose wether to place an X or an O each turn. Players placing Xs or Os on the game board until either an opponent has three in a row or all nine squares are filled. Player 1 goes first, and in the event that no one has three in a row, the stalemate is called a cat game");
-                    break;
-                case "Revenge Tic-tac-toe":
-                    ruleWindow = new RuleWindow("The object of Revenge Tic-tac-toe is to get three in a row without your opponent getting three-in-a-row in the next turn. If a player gets three in a row, their opponent has one more turn to try and get three in a row and if they are able to, they win. You play on a three by three game board. The first player is known as X and the second is O. Players alternate placing Xs and Os on the game board until either opponent has three in a row or all nine squares are filled. X always goes first, and in the event that no one has three in a row, the stalemate is called a cat game");
-                    break;
-                case "Random Tic-tac-toe":
-                    ruleWindow = new RuleWindow("The object of Random Tic-tac-toe is to get three in a row. A random player is chosen to play each turn. You play on a three by three game board. The first player is known as X and the second is O. Players alternate placing Xs and Os on the game board until either opponent has three in a row or all nine squares are filled. In the event that no one has three in a row, the stalemate is called a cat game");
-                    break;
-                default:
-                    ruleWindow = new RuleWindow("No Game mode detected");
-                    break;
-            }
-
-            ruleWindow.Show();
+            MessageBox.Show("The object of Tic Tac Toe is to get three in a row. You play on a three by three game board. The first player is known as X and the second is O. Players alternate placing Xs and Os on the game board until either oppent has three in a row or all nine squares are filled. X always goes first, and in the event that no one has three in a row, the stalemate is called a cat game");
         }
 
         //Method that handles the event of a button click
@@ -479,7 +435,7 @@ namespace Tic_Tac_Toe
                 mainWindow.Show();
 
                 //Sets background and foreground color
-                mainWindow.mainGrid.Background = (Brush)Application.Current.Properties["Background"]; 
+                mainWindow.mainGrid.Background = (Brush)Application.Current.Properties["Background"];
                 mainWindow.title.Foreground = (Brush)Application.Current.Properties["FontColor"];
                 mainWindow.boardLabel.Foreground = (Brush)Application.Current.Properties["FontColor"];
 

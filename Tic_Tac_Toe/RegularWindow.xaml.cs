@@ -139,15 +139,8 @@ namespace Tic_Tac_Toe
             }
             else if (value == "Save")
             {
-<<<<<<< HEAD
                 BinaryFormatter binFormat = new BinaryFormatter();
                 using (Stream fStream = new FileStream(DateTime.Now.ToFileTime() + ".dat", FileMode.Create, FileAccess.Write, FileShare.None))
-=======
-                // System.IO.File.WriteAllText(@".\" + DateTime.Now.ToFileTime() + ".txt", mode + '\n' + gameBoard.ToString());
-                BinaryFormatter binFormat = new BinaryFormatter();
-                using (Stream fStream =
-                    new FileStream(DateTime.Now.ToFileTime() + ".dat", FileMode.Create, FileAccess.Write, FileShare.None))
->>>>>>> 6729cfb108a6b179b4c607d489a1d06b3e41d260
                 {
                     binFormat.Serialize(fStream, gameBoard);
                 }
@@ -245,7 +238,7 @@ namespace Tic_Tac_Toe
                             }
                             else
                             {
-                                MessageBox.Show((playerTurn ? "O" : "X") + " has one more chance to win or else they lose.");
+                                MessageBox.Show(playerTurn ? "X" : "O" + " has one more chance to win or else they lose.");
                                 playerTurn = !playerTurn;
                                 oneMoreTurn = true;
                                 return;
@@ -280,7 +273,6 @@ namespace Tic_Tac_Toe
                     MessageBox.Show("Cats game, nobody won!");
                     gameOver = true;
                     playAgainMessage();
-                    return;
                 }
             }
             else

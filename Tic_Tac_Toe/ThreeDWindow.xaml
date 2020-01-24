@@ -20,7 +20,7 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid Name="ThreeDGrid" Margin="0,30,0,0">
+    <Grid Name="RegularGrid" Margin="0,30,0,0">
 
         <Grid Name="Grid13d" Margin="154,8,154,325" RenderTransformOrigin="0.4,0.4" HorizontalAlignment="Stretch" Width="Auto">
             <Grid.RenderTransform>

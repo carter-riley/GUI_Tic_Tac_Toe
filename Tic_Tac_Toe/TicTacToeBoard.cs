@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Tic_Tac_Toe
 {
     [Serializable]
-    public class TicTacToeBoard
+    public class TicTacToeBoard : Cell
     {
         /*
          * 0: Normal Tic-tac-toe
@@ -393,10 +393,7 @@ namespace Tic_Tac_Toe
                     {
                         return true;
                     }
-                    else
-                    {
-                        return false;
-                    }
+
                 }
                 for (int j = 0; j < N; j++)
                 {
@@ -431,10 +428,7 @@ namespace Tic_Tac_Toe
                     {
                         return true;
                     }
-                    else
-                    {
-                        return false;
-                    }
+
                 }
                 for (int j = 0; j < N; j++)
                 {
@@ -469,14 +463,11 @@ namespace Tic_Tac_Toe
                     {
                         return true;
                     }
-                    else
-                    {
-                        return false;
-                    }
+                    
                 }
                 if ((ThreeDGrid[0, 0, 0].symbol == playerSymbol && ThreeDGrid[1, 1, 1].symbol == playerSymbol && ThreeDGrid[2, 2, 2].symbol == playerSymbol) ||
-                   (ThreeDGrid[2, 0, 0].symbol == playerSymbol && ThreeDGrid[1, 1, 1].symbol == playerSymbol && ThreeDGrid[0, 2, 0].symbol == playerSymbol) ||
-                   (ThreeDGrid[0, 2, 0].symbol == playerSymbol && ThreeDGrid[1, 1, 1].symbol == playerSymbol && ThreeDGrid[2, 0, 0].symbol == playerSymbol) ||
+                   (ThreeDGrid[2, 0, 0].symbol == playerSymbol && ThreeDGrid[1, 1, 1].symbol == playerSymbol && ThreeDGrid[0, 2, 2].symbol == playerSymbol) ||
+                   (ThreeDGrid[0, 2, 0].symbol == playerSymbol && ThreeDGrid[1, 1, 1].symbol == playerSymbol && ThreeDGrid[2, 0, 2].symbol == playerSymbol) ||
                    (ThreeDGrid[2, 2, 0].symbol == playerSymbol && ThreeDGrid[1, 1, 1].symbol == playerSymbol && ThreeDGrid[0, 0, 2].symbol == playerSymbol))
                 {
                     return true;

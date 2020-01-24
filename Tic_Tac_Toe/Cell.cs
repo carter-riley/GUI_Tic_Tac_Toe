@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Tic_Tac_Toe
 {
     [Serializable]
-    public class Cell
+    public class Cell : Coordinates
     {
         public Coordinates location { get; set; }
         public char symbol { get; set; }

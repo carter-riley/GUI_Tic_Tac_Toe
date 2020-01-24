@@ -4,15 +4,26 @@
 winexe
 C#
 .cs
+<<<<<<< HEAD
 C:\Users\Carte\Documents\final\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\
+=======
+H:\FinalProject\GUI_Tic_Tac_Toe\Tic_Tac_Toe\obj\Debug\
+>>>>>>> 6729cfb108a6b179b4c607d489a1d06b3e41d260
 Tic_Tac_Toe
 none
 false
 DEBUG;TRACE
+<<<<<<< HEAD
 C:\Users\Carte\Documents\final\GUI_Tic_Tac_Toe\Tic_Tac_Toe\App.xaml
 7-1542774083
 
 18-2132217276
+=======
+H:\FinalProject\GUI_Tic_Tac_Toe\Tic_Tac_Toe\App.xaml
+7-1542774083
+
+15-1160268106
+>>>>>>> 6729cfb108a6b179b4c607d489a1d06b3e41d260
 13-1505183044
 CustomWindow.xaml;MainWindow.xaml;RuleWindow.xaml;ThreeDWindow.xaml;RegularWindow.xaml;SettingWindow.xaml;UltimateWindow.xaml;
 

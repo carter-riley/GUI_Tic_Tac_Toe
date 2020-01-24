@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="UltimateWindow" Height="1000" Width="1000"
         Loaded="UltimateWindow_OnLoaded"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Name="ultimateWindow">
     <Grid Name="UltimateGrid" Margin="0,79,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>

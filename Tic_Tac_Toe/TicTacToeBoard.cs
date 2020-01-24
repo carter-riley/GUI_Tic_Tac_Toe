@@ -428,6 +428,10 @@ namespace Tic_Tac_Toe
                     {
                         return true;
                     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6729cfb108a6b179b4c607d489a1d06b3e41d260
                 }
                 for (int j = 0; j < N; j++)
                 {
@@ -462,7 +466,11 @@ namespace Tic_Tac_Toe
                     {
                         return true;
                     }
+<<<<<<< HEAD
 
+=======
+                    
+>>>>>>> 6729cfb108a6b179b4c607d489a1d06b3e41d260
                 }
                 if ((ThreeDGrid[0, 0, 0].symbol == playerSymbol && ThreeDGrid[1, 1, 1].symbol == playerSymbol && ThreeDGrid[2, 2, 2].symbol == playerSymbol) ||
                    (ThreeDGrid[2, 0, 0].symbol == playerSymbol && ThreeDGrid[1, 1, 1].symbol == playerSymbol && ThreeDGrid[0, 2, 2].symbol == playerSymbol) ||

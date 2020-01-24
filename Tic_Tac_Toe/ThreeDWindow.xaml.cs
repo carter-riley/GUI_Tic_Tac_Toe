@@ -26,13 +26,17 @@ namespace Tic_Tac_Toe
         private TicTacToeBoard gameBoard;
         private int moveCounter = 0;
         private string mode;
+<<<<<<< HEAD
         private TicTacToeBoard boardFromFile;
+=======
+>>>>>>> 6729cfb108a6b179b4c607d489a1d06b3e41d260
 
         public ThreeDWindow(string gameMode)
         {
             mode = gameMode;
             InitializeComponent();
             gameBoard = new TicTacToeBoard(true);
+<<<<<<< HEAD
             gameBoard.gameMode = "3D";
             // MessageBox.Show("Player X is going first.");
         }
@@ -181,6 +185,12 @@ namespace Tic_Tac_Toe
             }
         }
 
+=======
+            gameBoard.gameMode = 8;
+            // MessageBox.Show("Player X is going first.");
+        }
+
+>>>>>>> 6729cfb108a6b179b4c607d489a1d06b3e41d260
         //TODO
         //Need to return an array of something
         //Logisitcs - Carter
@@ -225,7 +235,12 @@ namespace Tic_Tac_Toe
             else if (value == "Save")
             {
                 BinaryFormatter binFormat = new BinaryFormatter();
+<<<<<<< HEAD
                 using (Stream fStream = new FileStream(DateTime.Now.ToFileTime() + ".dat", FileMode.Create, FileAccess.Write, FileShare.None))
+=======
+                using (Stream fStream =
+                    new FileStream(DateTime.Now.ToFileTime() + ".dat", FileMode.Create, FileAccess.Write, FileShare.None))
+>>>>>>> 6729cfb108a6b179b4c607d489a1d06b3e41d260
                 {
                     binFormat.Serialize(fStream, gameBoard);
                 }
@@ -256,7 +271,7 @@ namespace Tic_Tac_Toe
             if (gameOver)
             {
                 MessageBox.Show("The game is over.");
-                //playAgainMessage();
+                playAgainMessage();
                 return;
             }
             //Creates a new button
@@ -282,14 +297,14 @@ namespace Tic_Tac_Toe
                         {
                             MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
                             gameOver = true;
-                            //playAgainMessage();
+                            playAgainMessage();
                             return;
                         }
                         else
                         {
                             MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
                             gameOver = true;
-                            //playAgainMessage();
+                            playAgainMessage();
                             return;
                         }
                         
@@ -353,6 +368,7 @@ namespace Tic_Tac_Toe
         //Used for the Rules button
         private void btn_RuleClick(object sender, RoutedEventArgs e)
         {
+<<<<<<< HEAD
             //Pops up a message box that displays the rules of the chosen game
             //*********Replace with actual rules
             switch (mode)
@@ -382,6 +398,11 @@ namespace Tic_Tac_Toe
                     MessageBox.Show("No Game mode detected");
                     break;
             }
+=======
+            RuleWindow ruleWindow = new RuleWindow("3D tic-tac-toe, is an abstract strategy board game, generally for two players. It is similar in concept to traditional tic-tac-toe but is played in a cubical array of cells. Players take turns placing their markers in blank cells in the array. The first player to achieve three of their own markers in a row wins. The winning row can be horizontal, vertical, or diagonal on a single board as in regular tic-tac-toe, or vertically in a column, or a diagonal line through three boards.");
+
+            ruleWindow.Show();
+>>>>>>> 6729cfb108a6b179b4c607d489a1d06b3e41d260
         }
 
         //Method that handles the event of a button click
@@ -400,5 +421,56 @@ namespace Tic_Tac_Toe
             this.Close();
 
         }
+<<<<<<< HEAD
+=======
+
+
+        //Method that creates a message box with buttons
+        //Used to ask the user if they want to play again or not
+        private void playAgainMessage()
+        {
+            //Creates a message box with buttons
+            MessageBoxResult playAgainBoxResult =
+                MessageBox.Show("Do you want to play again?", "Play Again", MessageBoxButton.YesNo);
+
+            //If user says yes then it clears the board
+            if (playAgainBoxResult == MessageBoxResult.Yes)
+            {
+                foreach (Button btn in this.Grid13d.Children.OfType<Button>())
+                {
+                    btn.Content = "";
+                }
+
+                foreach (Button btn in this._3dGrid2.Children.OfType<Button>())
+                {
+                    btn.Content = "";
+                }
+
+                foreach (Button btn in this._3dGrid3.Children.OfType<Button>())
+                {
+                    btn.Content = "";
+                }
+
+                gameOver = false;
+                gameBoard = null;
+                gameBoard = new TicTacToeBoard(true);
+                playerTurn = true;
+                moveCounter = 0;
+            }
+            else if (playAgainBoxResult == MessageBoxResult.No) //If user says no then it closes window and opens main window
+            {
+                MainWindow mainWindow = new MainWindow();
+
+                mainWindow.Show();
+
+                //Sets background and foreground color
+                mainWindow.mainGrid.Background = (Brush)Application.Current.Properties["Background"];
+                mainWindow.title.Foreground = (Brush)Application.Current.Properties["FontColor"];
+                mainWindow.boardLabel.Foreground = (Brush)Application.Current.Properties["FontColor"];
+
+                this.Close();
+            }
+        }
+>>>>>>> 6729cfb108a6b179b4c607d489a1d06b3e41d260
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,8 +27,13 @@ namespace Tic_Tac_Toe
         private int moveCounter = 0;
         private string mode;
         private Coordinates lastMove = null;
+<<<<<<< HEAD
         private TicTacToeBoard[,] theBoards;
         private TicTacToeBoard boardFromFile;
+=======
+        private TicTacToeBoard[,] theBoards = new TicTacToeBoard[3, 3];
+
+>>>>>>> 6729cfb108a6b179b4c607d489a1d06b3e41d260
 
         public UltimateWindow(string gameMode)
         {
@@ -103,9 +110,13 @@ namespace Tic_Tac_Toe
             }
             else if (value == "Save")
             {
-                //TODO
-                //Implement save method using a text file
-                //
+                BinaryFormatter binFormat = new BinaryFormatter();
+                using (Stream fStream =
+                    new FileStream(DateTime.Now.ToFileTime() + ".dat", FileMode.Create, FileAccess.Write, FileShare.None))
+                {
+                    binFormat.Serialize(fStream, gameBoard);
+                    binFormat.Serialize(fStream, theBoards);
+                }
             }
             else if (value == "Quit")
             {
@@ -146,6 +157,7 @@ namespace Tic_Tac_Toe
                 theBoards[location.row % 3, location.col % 3].makeMove(new Coordinates(location.row % 3, location.col % 3), playerTurn ? 'X' : 'O', mode);
                 btn.Content = playerTurn ? "X" : "O";
 
+<<<<<<< HEAD
                 switch (location.row % 3 + " " + location.col % 3)
                 {
                     case "0 0":
@@ -256,6 +268,13 @@ namespace Tic_Tac_Toe
                             }
                         }
                         break;
+=======
+                if (gameBoard.isWinner(playerTurn ? 'X' : 'O', mode))
+                {
+                    MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
+                    gameOver = true;
+                    playAgainMessage();
+>>>>>>> 6729cfb108a6b179b4c607d489a1d06b3e41d260
                 }
 
 
@@ -304,9 +323,52 @@ namespace Tic_Tac_Toe
         //Used for the Rules button
         private void btn_RuleClick(object sender, RoutedEventArgs e)
         {
+            RuleWindow ruleWindow;
+
             //Pops up a message box that displays the rules of the chosen game
             //*********Replace with actual rules
-            MessageBox.Show("The object of Ultimate Tic-tac-toe is to get three in a row. You play on a three by three game board of three by three game boards. The first player is known as X and the second is O. Players alternate placing Xs and Os on the each game board determined by where the last player played. Play is ended when either opponent has three in a row or all nine squares are filled. X always goes first, and in the event that no one has three in a row, the stalemate is called a cat game");
+            ruleWindow = new RuleWindow("The object of Ultimate Tic-tac-toe is to get three in a row. You play on a three by three game board of three by three game boards. The first player is known as X and the second is O. Players alternate placing Xs and Os on the each game board determined by where the last player played. Play is ended when either opponent has three in a row or all nine squares are filled. X always goes first, and in the event that no one has three in a row, the stalemate is called a cat game");
+            ruleWindow.Show();
+
         }
+
+
+        //Method that creates a message box with buttons
+        //Used to ask the user if they want to play again or not
+        private void playAgainMessage()
+        {
+            //Creates a message box with buttons
+            MessageBoxResult playAgainBoxResult =
+                MessageBox.Show("Do you want to play again?", "Play Again", MessageBoxButton.YesNo);
+
+            //If user says yes then it clears the board
+            if (playAgainBoxResult == MessageBoxResult.Yes)
+            {
+                foreach (Button btn in this.UltimateGrid.Children.OfType<Button>())
+                {
+                    btn.Content = "";
+                }
+
+                gameOver = false;
+                gameBoard = null;
+                gameBoard = new TicTacToeBoard(3, 0);
+                playerTurn = true;
+                moveCounter = 0;
+            }
+            else if (playAgainBoxResult == MessageBoxResult.No) //If user says no then it closes window and opens main window
+            {
+                MainWindow mainWindow = new MainWindow();
+
+                mainWindow.Show();
+
+                //Sets background and foreground color
+                mainWindow.mainGrid.Background = (Brush)Application.Current.Properties["Background"];
+                mainWindow.title.Foreground = (Brush)Application.Current.Properties["FontColor"];
+                mainWindow.boardLabel.Foreground = (Brush)Application.Current.Properties["FontColor"];
+
+                this.Close();
+            }
+        }
+
     }
 }

@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tic_Tac_Toe"
         mc:Ignorable="d"
-        Title="Rules" Height="290
-        " Width="550"
+        Title="Rules" Height="290" Width="550"
         Loaded="Rules_OnLoaded"
         WindowStartupLocation="CenterScreen">
     <Grid Name="ruleGrid">

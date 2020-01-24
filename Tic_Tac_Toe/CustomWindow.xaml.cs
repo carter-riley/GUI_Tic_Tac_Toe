@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,15 +28,28 @@ namespace Tic_Tac_Toe
         private int moveCounter = 0;
         private string mode;
         private bool oneMoreTurn = false;
+        private bool loadFromSave = false;
 
         public CustomWindow(string gameMode)
         {
             mode = gameMode;
             InitializeComponent();
-            gameBoard = new TicTacToeBoard((int)Application.Current.Properties["BoardSize"], 0);
+            gameBoard = new TicTacToeBoard((int)Application.Current.Properties["BoardSize"], mode);
+        }
+
+        public CustomWindow(string gameMode, TicTacToeBoard boardFromFile) : this(gameMode)
+        {
+            mode = gameMode;
+            gameBoard = boardFromFile;
+            loadFromSave = true;
+            InitializeComponent();
+
+
         }
 
         private List<Button> board = new List<Button>();
+        private TicTacToeBoard boardFromFile;
+
         //private bool playerTurn = false;
 
 
@@ -64,12 +79,21 @@ namespace Tic_Tac_Toe
             {
                 for (int j = 0; j < (int)Application.Current.Properties["BoardSize"]; j++)
                 {
+
                     Button gridBtn = new Button();
 
                     Grid.SetRow(gridBtn, i);
                     Grid.SetColumn(gridBtn, j);
                     gridBtn.Click += Button_Click;
                     gridBtn.FontSize = 40;
+
+                    if (loadFromSave)
+                    {
+                        if (gameBoard.Grid[j,i].symbol != '\0')
+                        {
+                            gridBtn.Content = gameBoard.Grid[i, j].symbol;
+                        }
+                    }
 
                     board.Add(gridBtn);
                     dynamicGrid.Children.Add(gridBtn);
@@ -159,7 +183,11 @@ namespace Tic_Tac_Toe
             }
             else if (value == "Save")
             {
-                System.IO.File.WriteAllText(@".\" + DateTime.Now.ToFileTime() + ".txt", mode + '\n' + gameBoard.ToString());
+                BinaryFormatter binFormat = new BinaryFormatter();
+                using (Stream fStream = new FileStream(DateTime.Now.ToFileTime() + ".dat", FileMode.Create, FileAccess.Write, FileShare.None))
+                {
+                    binFormat.Serialize(fStream, gameBoard);
+                }
             }
             else if (value == "Quit")
             {
@@ -391,7 +419,7 @@ namespace Tic_Tac_Toe
 
                 gameOver = false;
                 gameBoard = null;
-                gameBoard = new TicTacToeBoard((int)Application.Current.Properties["BoardSize"], 0);
+                gameBoard = new TicTacToeBoard((int)Application.Current.Properties["BoardSize"], mode);
                 playerTurn = true;
                 moveCounter = 0;
             }

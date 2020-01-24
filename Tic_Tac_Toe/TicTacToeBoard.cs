@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Tic_Tac_Toe
 {
-    public class TicTacToeBoard
+    [Serializable]
+    public class TicTacToeBoard : Cell
     {
         /*
          * 0: Normal Tic-tac-toe
@@ -37,7 +38,7 @@ namespace Tic_Tac_Toe
          * 8: 3D Tic-tac-toe
          *      NxNxN, N in a row, X and O
          */
-        public int gameMode;
+        public string gameMode;
         public int N { get; set; }
         public Cell[,] Grid { get; set; }
         public Cell[,,] ThreeDGrid { get; set; }
@@ -47,12 +48,12 @@ namespace Tic_Tac_Toe
             Grid = new Cell[N, N];
             this.N = 3;
             this.Grid = new Cell[this.N, this.N];
-            this.gameMode = 0;
+            this.gameMode = "Normal Tic-tac-toe";
         }
 
         public TicTacToeBoard(bool threeD)
         {
-            this.gameMode = 8;
+            this.gameMode = "3D";
             N = 3;
 
             ThreeDGrid = new Cell[3, 3, 3];
@@ -69,12 +70,12 @@ namespace Tic_Tac_Toe
             this.ThreeDGrid = ThreeDGrid;
         }
 
-        public TicTacToeBoard(int size, int mode)
+        public TicTacToeBoard(int size, string mode)
         {
             this.gameMode = mode;
             N = size;
 
-            if (gameMode == 8)
+            if (gameMode == "3D")
             {
                 ThreeDGrid = new Cell[3, 3, 3];
                 for (int i = 0; i < N; i++)
@@ -106,11 +107,11 @@ namespace Tic_Tac_Toe
             
         }
 
-        public TicTacToeBoard(int mode)
+        public TicTacToeBoard(string mode)
         {
             switch (mode)
             {
-                case 1:
+                case "Normal Tic-tac - toe":
                     N = 3;
                     Grid = new Cell[N, N];
                     for (int i = 0; i < N; i++)
@@ -150,7 +151,7 @@ namespace Tic_Tac_Toe
 
         public bool isValidMove(Coordinates location, string mode)
         {
-            if (gameMode == 8)
+            if (gameMode == "3D")
             {
                 if(ThreeDGrid[location.row, location.col, location.depth].symbol != '\0')
                 {
@@ -283,7 +284,7 @@ namespace Tic_Tac_Toe
 
         public void makeMove(Coordinates location, char playerSymbol, string mode)
         {
-            if (gameMode == 8)
+            if (gameMode == "3D")
             {
                 Cell currCell = ThreeDGrid[location.row, location.col, location.depth];
                 currCell.symbol = playerSymbol;
@@ -298,7 +299,7 @@ namespace Tic_Tac_Toe
 
         public bool isWinner(char playerSymbol, string mode)
         {
-            if (gameMode == 8)
+            if (gameMode == "3D")
             {
                 // Depth
                 for(int i = 0; i < N; i++)
@@ -392,10 +393,7 @@ namespace Tic_Tac_Toe
                     {
                         return true;
                     }
-                    else
-                    {
-                        return false;
-                    }
+
                 }
                 for (int j = 0; j < N; j++)
                 {
@@ -429,10 +427,6 @@ namespace Tic_Tac_Toe
                     if (counter == N)
                     {
                         return true;
-                    }
-                    else
-                    {
-                        return false;
                     }
                 }
                 for (int j = 0; j < N; j++)
@@ -468,21 +462,18 @@ namespace Tic_Tac_Toe
                     {
                         return true;
                     }
-                    else
-                    {
-                        return false;
-                    }
+
                 }
                 if ((ThreeDGrid[0, 0, 0].symbol == playerSymbol && ThreeDGrid[1, 1, 1].symbol == playerSymbol && ThreeDGrid[2, 2, 2].symbol == playerSymbol) ||
-                   (ThreeDGrid[2, 0, 0].symbol == playerSymbol && ThreeDGrid[1, 1, 1].symbol == playerSymbol && ThreeDGrid[0, 2, 0].symbol == playerSymbol) ||
-                   (ThreeDGrid[0, 2, 0].symbol == playerSymbol && ThreeDGrid[1, 1, 1].symbol == playerSymbol && ThreeDGrid[2, 0, 0].symbol == playerSymbol) ||
+                   (ThreeDGrid[2, 0, 0].symbol == playerSymbol && ThreeDGrid[1, 1, 1].symbol == playerSymbol && ThreeDGrid[0, 2, 2].symbol == playerSymbol) ||
+                   (ThreeDGrid[0, 2, 0].symbol == playerSymbol && ThreeDGrid[1, 1, 1].symbol == playerSymbol && ThreeDGrid[2, 0, 2].symbol == playerSymbol) ||
                    (ThreeDGrid[2, 2, 0].symbol == playerSymbol && ThreeDGrid[1, 1, 1].symbol == playerSymbol && ThreeDGrid[0, 0, 2].symbol == playerSymbol))
                 {
                     return true;
                 }
 
                 return false;
-            }
+            } 
             else
             {
                 for(int i = 0; i < N; i++)

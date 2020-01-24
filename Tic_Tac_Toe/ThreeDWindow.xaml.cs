@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,14 +26,159 @@ namespace Tic_Tac_Toe
         private TicTacToeBoard gameBoard;
         private int moveCounter = 0;
         private string mode;
+        private TicTacToeBoard boardFromFile;
 
         public ThreeDWindow(string gameMode)
         {
             mode = gameMode;
             InitializeComponent();
             gameBoard = new TicTacToeBoard(true);
-            gameBoard.gameMode = 8;
+            gameBoard.gameMode = "3D";
             // MessageBox.Show("Player X is going first.");
+        }
+
+        public ThreeDWindow(string gameMode, TicTacToeBoard boardFromFile) : this(gameMode)
+        {
+            mode = gameMode;
+            gameBoard = boardFromFile;
+            InitializeComponent();
+
+            Button btn;
+            if (gameBoard.ThreeDGrid[0, 0, 0].symbol != '\0')
+            {
+                btn = _a0;
+                btn.Content = gameBoard.ThreeDGrid[0, 0,0].symbol;
+            }
+            if (gameBoard.ThreeDGrid[1, 0,0].symbol != '\0')
+            {
+                btn = _b0;
+                btn.Content = gameBoard.ThreeDGrid[1, 0,0].symbol;
+            }
+            if (gameBoard.ThreeDGrid[2, 0,0].symbol != '\0')
+            {
+                btn = _c0;
+                btn.Content = gameBoard.ThreeDGrid[2, 0,0].symbol;
+            }
+            if (gameBoard.ThreeDGrid[0, 1,0].symbol != '\0')
+            {
+                btn = _d0;
+                btn.Content = gameBoard.ThreeDGrid[0, 1,0].symbol;
+            }
+            if (gameBoard.ThreeDGrid[1, 1,0].symbol != '\0')
+            {
+                btn = _e0;
+                btn.Content = gameBoard.ThreeDGrid[1, 1,0].symbol;
+            }
+            if (gameBoard.ThreeDGrid[2, 1,0].symbol != '\0')
+            {
+                btn = _f0;
+                btn.Content = gameBoard.ThreeDGrid[2, 1,0].symbol;
+            }
+            if (gameBoard.ThreeDGrid[0, 2,0].symbol != '\0')
+            {
+                btn = _g0;
+                btn.Content = gameBoard.ThreeDGrid[0, 2,0].symbol;
+            }
+            if (gameBoard.ThreeDGrid[1, 2,0].symbol != '\0')
+            {
+                btn = _h0;
+                btn.Content = gameBoard.ThreeDGrid[1, 2,0].symbol;
+            }
+            if (gameBoard.ThreeDGrid[2, 2,0].symbol != '\0')
+            {
+                btn = _i0;
+                btn.Content = gameBoard.ThreeDGrid[2, 2,0].symbol;
+            }
+            if (gameBoard.ThreeDGrid[0, 0,1].symbol != '\0')
+            {
+                btn = _a1;
+                btn.Content = gameBoard.ThreeDGrid[0, 0,1].symbol;
+            }
+            if (gameBoard.ThreeDGrid[1, 0,1].symbol != '\0')
+            {
+                btn = _b1;
+                btn.Content = gameBoard.ThreeDGrid[1, 0,1].symbol;
+            }
+            if (gameBoard.ThreeDGrid[2, 0,1].symbol != '\0')
+            {
+                btn = _c1;
+                btn.Content = gameBoard.ThreeDGrid[2, 0,1].symbol;
+            }
+            if (gameBoard.ThreeDGrid[0, 1,1].symbol != '\0')
+            {
+                btn = _d1;
+                btn.Content = gameBoard.ThreeDGrid[0, 1,1].symbol;
+            }
+            if (gameBoard.ThreeDGrid[1, 1,1].symbol != '\0')
+            {
+                btn = _e1;
+                btn.Content = gameBoard.ThreeDGrid[1, 1,1].symbol;
+            }
+            if (gameBoard.ThreeDGrid[2, 1,1].symbol != '\0')
+            {
+                btn = _f1;
+                btn.Content = gameBoard.ThreeDGrid[2, 1,1].symbol;
+            }
+            if (gameBoard.ThreeDGrid[0, 2,1].symbol != '\0')
+            {
+                btn = _g1;
+                btn.Content = gameBoard.ThreeDGrid[0, 2,1].symbol;
+            }
+            if (gameBoard.ThreeDGrid[1, 2,1].symbol != '\0')
+            {
+                btn = _h1;
+                btn.Content = gameBoard.ThreeDGrid[1, 2,1].symbol;
+            }
+            if (gameBoard.ThreeDGrid[2, 2,1].symbol != '\0')
+            {
+                btn = _i1;
+                btn.Content = gameBoard.ThreeDGrid[2, 2,1].symbol;
+            }
+            if (gameBoard.ThreeDGrid[0, 0,2].symbol != '\0')
+            {
+                btn = _a2;
+                btn.Content = gameBoard.ThreeDGrid[0, 0,2].symbol;
+            }
+            if (gameBoard.ThreeDGrid[1, 0,2].symbol != '\0')
+            {
+                btn = _b2;
+                btn.Content = gameBoard.ThreeDGrid[1, 0,2].symbol;
+            }
+            if (gameBoard.ThreeDGrid[2, 0,2].symbol != '\0')
+            {
+                btn = _c2;
+                btn.Content = gameBoard.ThreeDGrid[2, 0,2].symbol;
+            }
+            if (gameBoard.ThreeDGrid[0, 1,2].symbol != '\0')
+            {
+                btn = _d2;
+                btn.Content = gameBoard.ThreeDGrid[0, 1,2].symbol;
+            }
+            if (gameBoard.ThreeDGrid[1, 1,2].symbol != '\0')
+            {
+                btn = _e2;
+                btn.Content = gameBoard.ThreeDGrid[1, 1,2].symbol;
+            }
+            if (gameBoard.ThreeDGrid[2, 1,2].symbol != '\0')
+            {
+                btn = _f2;
+                btn.Content = gameBoard.ThreeDGrid[2, 1,2].symbol;
+            }
+            if (gameBoard.ThreeDGrid[0, 2,2].symbol != '\0')
+            {
+                btn = _g2;
+                btn.Content = gameBoard.ThreeDGrid[0, 2,2].symbol;
+            }
+            if (gameBoard.ThreeDGrid[1, 2,2].symbol != '\0')
+            {
+                btn = _g2;
+                btn.Content = gameBoard.ThreeDGrid[1, 2,2].symbol;
+            }
+            if (gameBoard.ThreeDGrid[2, 2,2].symbol != '\0')
+            {
+                btn = _i2;
+                btn.Content = gameBoard.ThreeDGrid[2, 2,2].symbol;
+            }
         }
 
         //TODO
@@ -77,9 +224,11 @@ namespace Tic_Tac_Toe
             }
             else if (value == "Save")
             {
-                //TODO
-                //Implement save method using a text file
-                //
+                BinaryFormatter binFormat = new BinaryFormatter();
+                using (Stream fStream = new FileStream(DateTime.Now.ToFileTime() + ".dat", FileMode.Create, FileAccess.Write, FileShare.None))
+                {
+                    binFormat.Serialize(fStream, gameBoard);
+                }
             }
             else if (value == "Quit")
             {

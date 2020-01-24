@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using Microsoft.Win32;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Tic_Tac_Toe
 {
@@ -63,7 +64,6 @@ namespace Tic_Tac_Toe
 
             // Set SelectedItem as Window Title.
             string value = comboBox.SelectedItem as string;
-
 
             if (mainText.Text == "")
             {
@@ -217,26 +217,29 @@ namespace Tic_Tac_Toe
             string filePath = string.Empty;
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog.Filter = "dat files (*.dat)|*.dat|All files (*.*)|*.*";
             openFileDialog.RestoreDirectory = true;
 
             openFileDialog.ShowDialog();
 
             filePath = openFileDialog.FileName;
-            Stream fileStream = openFileDialog.OpenFile();
 
-            using (StreamReader reader = new StreamReader(fileStream))
+            if (filePath.Equals(String.Empty))
             {
-                fileContent = reader.ReadToEnd();
+                return;
             }
 
-            string gameMode = fileContent.Substring(0, fileContent.IndexOf('\n'));
-            string gameBoard = fileContent.Substring(fileContent.IndexOf('\n') + 1);
+            Stream fileStream = openFileDialog.OpenFile();
+            TicTacToeBoard boardFromFile;
 
-            int boardSize = Int32.Parse(gameBoard.Substring(gameBoard.IndexOf('\n') - 1, 1)) + 1;
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            using (Stream fStream = File.OpenRead(filePath))
+            {
+                boardFromFile = (TicTacToeBoard)binaryFormatter.Deserialize(fStream);
+            }
 
-            if (boardSize == 3) {
-                RegularWindow regularWindow = new RegularWindow(gameMode);
+            if (boardFromFile.N == 3 && boardFromFile.gameMode != "3D") {
+                RegularWindow regularWindow = new RegularWindow(string.Empty, boardFromFile);
 
                 //Closes initial window
                 this.Close();
@@ -248,11 +251,19 @@ namespace Tic_Tac_Toe
 
                 //Show next window
                 regularWindow.Show();
-            } else
+            } else if((boardFromFile.gameMode == "Normal Tic-tac-toe" ||
+                        boardFromFile.gameMode == "Misere Tic-tac-toe (Avoidance Tic-tac-toe)" ||
+                        boardFromFile.gameMode == "Misere Tic-tac-toe (Avoidance Tic-tac-toe)" ||
+                        boardFromFile.gameMode == "Nokato Tic-tac-toe" ||
+                        boardFromFile.gameMode == "Wild Tic-tac-toe (Your Choice Tic-tac-toe)" ||
+                        boardFromFile.gameMode == "Devil's Tic-tac-toe" ||
+                        boardFromFile.gameMode == "Revenge Tic-tac-toe" ||
+                        boardFromFile.gameMode == "Random Tic-tac-toe") 
+                        && boardFromFile.N > 3)
             {
-                Application.Current.Properties["BoardSize"] = boardSize; // Max board size of 10
+                Application.Current.Properties["BoardSize"] = boardFromFile.N; // Max board size of 10
 
-                CustomWindow customWindow = new CustomWindow(gameMode);
+                CustomWindow customWindow = new CustomWindow(boardFromFile.gameMode, boardFromFile);
 
                 //These startup variables should be colors
                 //Assigns these variables so the next window that is open can use them to have the same colors
@@ -264,7 +275,34 @@ namespace Tic_Tac_Toe
 
                 customWindow.createWindow(customWindow);
             }
+            else if (boardFromFile.gameMode == "Ultimate Tic-tac-toe")
+            {
+                UltimateWindow ultimateWindow = new UltimateWindow(boardFromFile.gameMode, boardFromFile);
 
+                this.Close();
+
+                //These startup variables should be colors
+                //Assigns these variables so the next window that is open can use them to have the same colors
+                Application.Current.Properties["Background"] = mainGrid.Background;
+                Application.Current.Properties["FontColor"] = title.Foreground;
+
+                //Show next window
+                ultimateWindow.Show();
+            }
+            else if (boardFromFile.gameMode == "3D")
+            {
+                ThreeDWindow threeDWindow = new ThreeDWindow(boardFromFile.gameMode, boardFromFile);
+
+                this.Close();
+
+                //These startup variables should be colors
+                //Assigns these variables so the next window that is open can use them to have the same colors
+                Application.Current.Properties["Background"] = mainGrid.Background;
+                Application.Current.Properties["FontColor"] = title.Foreground;
+
+                //Show next window
+                threeDWindow.Show();
+            } 
 
         }
     }

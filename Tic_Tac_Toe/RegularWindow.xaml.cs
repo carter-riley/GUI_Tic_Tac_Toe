@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,7 +34,65 @@ namespace Tic_Tac_Toe
         {
             mode = gameMode;
             InitializeComponent();
-            gameBoard = new TicTacToeBoard(3, 0);
+            gameBoard = new TicTacToeBoard(3, gameMode);
+            // MessageBox.Show("Player X is going first.");
+        }
+
+        public RegularWindow(string gameMode, TicTacToeBoard board)
+        {
+
+            InitializeComponent();
+
+            mode = gameMode;
+            gameBoard = board;
+            Button btn;
+            if (gameBoard.Grid[0,0].symbol != '\0')
+            {
+                // Button btn = (Button)Application.
+                btn = btn1;
+                btn.Content = gameBoard.Grid[0, 0].symbol;
+            }
+            if (gameBoard.Grid[1, 0].symbol != '\0')
+            {
+                btn =  btn2;
+                btn.Content = gameBoard.Grid[1, 0].symbol;
+            }
+            if (gameBoard.Grid[2, 0].symbol != '\0')
+            {
+                btn = btn3;
+                btn.Content = gameBoard.Grid[2, 0].symbol;
+            }
+            if (gameBoard.Grid[0, 1].symbol != '\0')
+            {
+                btn = btn4;
+                btn.Content = gameBoard.Grid[0, 1].symbol;
+            }
+            if (gameBoard.Grid[1, 1].symbol != '\0')
+            {
+                btn = btn5;
+                btn.Content = gameBoard.Grid[1,1].symbol;
+            }
+            if (gameBoard.Grid[2, 1].symbol != '\0')
+            {
+                btn = btn6;
+                btn.Content = gameBoard.Grid[2,1].symbol;
+            }
+            if (gameBoard.Grid[0, 2].symbol != '\0')
+            {
+                btn = btn7;
+                btn.Content = gameBoard.Grid[0, 2].symbol;
+            }
+            if (gameBoard.Grid[1, 2].symbol != '\0')
+            {
+                btn = btn8;
+                btn.Content = gameBoard.Grid[1,2].symbol;
+            }
+            if (gameBoard.Grid[2, 2].symbol != '\0')
+            {
+                btn = btn9;
+                btn.Content = gameBoard.Grid[2,2].symbol;
+            }
+
             // MessageBox.Show("Player X is going first.");
         }
 
@@ -79,7 +139,11 @@ namespace Tic_Tac_Toe
             }
             else if (value == "Save")
             {
-                System.IO.File.WriteAllText(@".\" + DateTime.Now.ToFileTime() + ".txt", mode + '\n' + gameBoard.ToString());
+                BinaryFormatter binFormat = new BinaryFormatter();
+                using (Stream fStream = new FileStream(DateTime.Now.ToFileTime() + ".dat", FileMode.Create, FileAccess.Write, FileShare.None))
+                {
+                    binFormat.Serialize(fStream, gameBoard);
+                }
             }
             else if (value == "Quit")
             {
@@ -343,7 +407,7 @@ namespace Tic_Tac_Toe
 
                 gameOver = false;
                 gameBoard = null;
-                gameBoard = new TicTacToeBoard(3, 0);
+                gameBoard = new TicTacToeBoard(3, mode);
                 playerTurn = true;
                 moveCounter = 0;
             }

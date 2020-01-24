@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tic_Tac_Toe
 {
+    [Serializable]
     public class Coordinates
     {
         public int row { get; set; }

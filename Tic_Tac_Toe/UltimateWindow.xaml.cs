@@ -26,23 +26,33 @@ namespace Tic_Tac_Toe
         private string mode;
         private Coordinates lastMove = null;
         private TicTacToeBoard[,] theBoards;
-
+        private TicTacToeBoard boardFromFile;
 
         public UltimateWindow(string gameMode)
         {
             mode = gameMode;
             InitializeComponent();
-            gameBoard = new TicTacToeBoard(3, 0);
-            theBoards[0, 0] = new TicTacToeBoard(3, 0);
-            theBoards[0, 1] = new TicTacToeBoard(3, 0);
-            theBoards[0, 2] = new TicTacToeBoard(3, 0);
-            theBoards[1, 0] = new TicTacToeBoard(3, 0);
-            theBoards[1, 1] = new TicTacToeBoard(3, 0);
-            theBoards[1, 2] = new TicTacToeBoard(3, 0);
-            theBoards[2, 0] = new TicTacToeBoard(3, 0);
-            theBoards[2, 1] = new TicTacToeBoard(3, 0);
-            theBoards[2, 2] = new TicTacToeBoard(3, 0);
+            gameBoard = new TicTacToeBoard(9, "Normal Tic-tac-toe");
+
+            theBoards = new TicTacToeBoard[3, 3];
+            theBoards[0, 0] = new TicTacToeBoard(3, "Normal Tic-tac-toe");
+            theBoards[0, 1] = new TicTacToeBoard(3, "Normal Tic-tac-toe");
+            theBoards[0, 2] = new TicTacToeBoard(3, "Normal Tic-tac-toe");
+            theBoards[1, 0] = new TicTacToeBoard(3, "Normal Tic-tac-toe");
+            theBoards[1, 1] = new TicTacToeBoard(3, "Normal Tic-tac-toe");
+            theBoards[1, 2] = new TicTacToeBoard(3, "Normal Tic-tac-toe");
+            theBoards[2, 0] = new TicTacToeBoard(3, "Normal Tic-tac-toe");
+            theBoards[2, 1] = new TicTacToeBoard(3, "Normal Tic-tac-toe");
+            theBoards[2, 2] = new TicTacToeBoard(3, "Normal Tic-tac-toe");
             // MessageBox.Show("Player X is going first.");
+        }
+
+        public UltimateWindow(string gameMode, TicTacToeBoard boardFromFile) : this(gameMode)
+        {
+            this.boardFromFile = boardFromFile;
+            mode = gameMode;
+            InitializeComponent();
+
         }
 
         //Method that sets the background and font for each button when window is loaded
@@ -133,13 +143,122 @@ namespace Tic_Tac_Toe
                 moveCounter++;
                 // MessageBox.Show("Move counter is: " + moveCounter);
                 gameBoard.makeMove(location, playerTurn ? 'X' : 'O', mode);
+                theBoards[location.row % 3, location.col % 3].makeMove(new Coordinates(location.row % 3, location.col % 3), playerTurn ? 'X' : 'O', mode);
                 btn.Content = playerTurn ? "X" : "O";
 
-                if (gameBoard.isWinner(playerTurn ? 'X' : 'O', mode))
+                switch (location.row % 3 + " " + location.col % 3)
                 {
-                    MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
-                    gameOver = true;
+                    case "0 0":
+
+                        
+                        if (theBoards[0,0].isWinner(playerTurn ? 'X' : 'O', mode))
+                        {
+                            theBoards[0,0].makeMove(new Coordinates(location.row % 3, location.col % 3), playerTurn ? 'X' : 'O', mode);
+                            if (gameBoard.isWinner(playerTurn ? 'X' : 'O', mode))
+                            {
+
+                                MessageBox.Show((playerTurn ? "X" : "O") + " Won this board!");
+                                gameOver = true;
+                            }
+                        }
+                        break;
+                    case "1 0":
+                        //case "0 1":
+                        if (theBoards[1, 0].isWinner(playerTurn ? 'X' : 'O', mode))
+                        {
+                            gameBoard.makeMove(location, playerTurn ? 'X' : 'O', mode);
+                            if (gameBoard.isWinner(playerTurn ? 'X' : 'O', mode))
+                            {
+                                MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
+                                gameOver = true;
+                            }
+                        }
+                        break;
+                    case "2 0":
+                        // case "0 2":
+                        if (theBoards[2, 0].isWinner(playerTurn ? 'X' : 'O', mode))
+                        {
+                            gameBoard.makeMove(location, playerTurn ? 'X' : 'O', mode);
+                            if (gameBoard.isWinner(playerTurn ? 'X' : 'O', mode))
+                            {
+                                MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
+                                gameOver = true;
+                            }
+                        }
+                        break;
+                    case "0 1":
+                        //case "1 0":
+                        if (theBoards[0, 1].isWinner(playerTurn ? 'X' : 'O', mode))
+                        {
+                            gameBoard.makeMove(location, playerTurn ? 'X' : 'O', mode);
+                            if (gameBoard.isWinner(playerTurn ? 'X' : 'O', mode))
+                            {
+                                MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
+                                gameOver = true;
+                            }
+                        }
+                        break;
+                    case "1 1":
+                        if (theBoards[1,1].isWinner(playerTurn ? 'X' : 'O', mode))
+                        {
+                            gameBoard.makeMove(location, playerTurn ? 'X' : 'O', mode);
+                            if (gameBoard.isWinner(playerTurn ? 'X' : 'O', mode))
+                            {
+                                MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
+                                gameOver = true;
+                            }
+                        }
+                        break;
+                    case "2 1":
+                        // case "1 2":
+                        if (theBoards[2,1].isWinner(playerTurn ? 'X' : 'O', mode))
+                        {
+                            gameBoard.makeMove(location, playerTurn ? 'X' : 'O', mode);
+                            if (gameBoard.isWinner(playerTurn ? 'X' : 'O', mode))
+                            {
+                                MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
+                                gameOver = true;
+                            }
+                        }
+                        break;
+                    case "0 2":
+                        // case "2 0":
+                        if (theBoards[0,2].isWinner(playerTurn ? 'X' : 'O', mode))
+                        {
+                            gameBoard.makeMove(location, playerTurn ? 'X' : 'O', mode);
+                            if (gameBoard.isWinner(playerTurn ? 'X' : 'O', mode))
+                            {
+                                MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
+                                gameOver = true;
+                            }
+                        }
+                        break;
+                    case "1 2":
+                        // case "2 1":
+                        if (theBoards[1,2].isWinner(playerTurn ? 'X' : 'O', mode))
+                        {
+                            gameBoard.makeMove(location, playerTurn ? 'X' : 'O', mode);
+                            if (gameBoard.isWinner(playerTurn ? 'X' : 'O', mode))
+                            {
+                                MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
+                                gameOver = true;
+                            }
+                        }
+                        break;
+                    case "2 2":
+                        if (theBoards[2,2].isWinner(playerTurn ? 'X' : 'O', mode))
+                        {
+                            gameBoard.makeMove(location, playerTurn ? 'X' : 'O', mode);
+                            if (gameBoard.isWinner(playerTurn ? 'X' : 'O', mode))
+                            {
+                                MessageBox.Show((playerTurn ? "X" : "O") + " Won!");
+                                gameOver = true;
+                            }
+                        }
+                        break;
                 }
+
+
             }
             else
             {

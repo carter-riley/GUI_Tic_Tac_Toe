@@ -139,6 +139,20 @@ namespace Tic_Tac_Toe
                 //Show next window
                 ultimateWindow.Show();
             }
+            else if (value == "3D Tic-tac-toe")
+            {
+                ThreeDWindow threeDWindow = new ThreeDWindow(value);
+
+                this.Close();
+
+                //These startup variables should be colors
+                //Assigns these variables so the next window that is open can use them to have the same colors
+                Application.Current.Properties["Background"] = mainGrid.Background;
+                Application.Current.Properties["FontColor"] = title.Foreground;
+
+                //Show next window
+                threeDWindow.Show();
+            }
             else
             {
                 if (int.Parse(mainText.Text) <= 3)

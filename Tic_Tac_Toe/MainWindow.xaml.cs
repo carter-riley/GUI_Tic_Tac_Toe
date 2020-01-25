@@ -230,6 +230,7 @@ namespace Tic_Tac_Toe
             string fileContent = string.Empty;
             string filePath = string.Empty;
 
+            // Restores a previsouly saved game and starts it in a new window
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "dat files (*.dat)|*.dat|All files (*.*)|*.*";
             openFileDialog.RestoreDirectory = true;

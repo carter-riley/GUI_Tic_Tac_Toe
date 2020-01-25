@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tic_Tac_Toe
 {
+    // Cell Class: contains the coordinates and symbol for the tic tac toe board
     [Serializable]
     public class Cell : Coordinates
     {

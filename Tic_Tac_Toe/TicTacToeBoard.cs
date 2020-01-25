@@ -43,6 +43,7 @@ namespace Tic_Tac_Toe
         public Cell[,] Grid { get; set; }
         public Cell[,,] ThreeDGrid { get; set; }
 
+        // Tic Tac Toe Board stores a two dimensional array of cells
         public TicTacToeBoard()
         {
             Grid = new Cell[N, N];
@@ -149,6 +150,7 @@ namespace Tic_Tac_Toe
             return ticTacToeBoardStr;
         }
 
+        // Class to check if current move location contains an X or O
         public bool isValidMove(Coordinates location, string mode)
         {
             if (gameMode == "3D")
@@ -169,6 +171,7 @@ namespace Tic_Tac_Toe
             }
         }
 
+        // Class to check if current move location contains an X or O for Ultimate TicTacToe Game mode
         public bool isValidMove(Coordinates location, string mode, Coordinates lastPlayerMove)
         {
 
@@ -296,7 +299,7 @@ namespace Tic_Tac_Toe
             }
         }
 
-
+        // Checks win conditions based on current board state, returns true if the current player won
         public bool isWinner(char playerSymbol, string mode)
         {
             if (gameMode == "3D")

@@ -139,6 +139,7 @@ namespace Tic_Tac_Toe
             }
             else if (value == "Save")
             {
+                // Saves the game in a binary format to restore at a later time
                 BinaryFormatter binFormat = new BinaryFormatter();
                 using (Stream fStream = new FileStream(DateTime.Now.ToFileTime() + ".dat", FileMode.Create, FileAccess.Write, FileShare.None))
                 {
@@ -176,10 +177,13 @@ namespace Tic_Tac_Toe
             //Creates a new button
             Button btn = sender as Button;
 
+
+            // Start of game loop, passes in the coordinates from the button
             Coordinates location = new Coordinates(Grid.GetRow(btn), Grid.GetColumn(btn));
             // if (btn.Content != null)
 
 
+            // Checks if the chosen location is a valid move, if not valid than stops and doesnt place a piece
             if (gameBoard.isValidMove(location, mode))
             {
                 moveCounter++;
@@ -193,6 +197,7 @@ namespace Tic_Tac_Toe
                 } 
                 else
                 {
+                    // Executes chosen move, place current players piece on the TicTacToeBoard object and the window
                     gameBoard.makeMove(location, playerTurn ? 'X' : 'O', mode);
                     btn.Content = playerTurn ? "X" : "O";
                 }
@@ -218,6 +223,7 @@ namespace Tic_Tac_Toe
                 }
                 else
                 {
+                    // checks if the player won, if so, ends the game
                     if (gameBoard.isWinner(playerTurn ? 'X' : 'O', mode))
                     {
                         if (mode == "Revenge Tic-tac-toe")

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tic_Tac_Toe
 {
+    // Coordinates class: defines an obect to store coordinates, including rows, cols and depth
     [Serializable]
     public class Coordinates
     {
@@ -15,7 +16,6 @@ namespace Tic_Tac_Toe
 
         /**
          * Coordinates default value constructor sets the value for the current Column coordinate
-         * @return none
          */
         public Coordinates()
         {
@@ -26,8 +26,6 @@ namespace Tic_Tac_Toe
 
         /**
          * Coordinates explicit value constructor sets the value for the current Column coordinate
-         * @param row, col column coordinate and int row coordinate
-         * @return nothing
          */
         public Coordinates(int row, int col)
         {
@@ -45,7 +43,6 @@ namespace Tic_Tac_Toe
 
         /**
          * overridden toString function returns coordinates
-         * @return Coordinate String
          */
         public override string ToString()
         {
